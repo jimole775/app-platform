@@ -1,0 +1,17 @@
+[
+    {
+        "name":"RemoteController",
+        "href":"http://localhost:8081",
+        "favicon":"ios-analytics-outline",
+        "external":"http://localhost:8081/external.js",
+        "vuex":"http://localhost:8081/storage/vuex"
+    },
+    {
+        "name":"RemoteController2",
+        "href":"http://localhost:8081",
+        "favicon":"ios-analytics",
+        "external":"http://localhost:8081/external.js",
+        "vuex":"http://localhost:8081/storage/vuex"
+    }
+
+]

@@ -1,32 +1,41 @@
 <template>
   <Row>
-    <Col span="1">
-        <Badge dot>
-            <Icon type="ios-notifications-outline" size="26"></Icon>
-        </Badge>
+    <Col span="1" v-for='app in apps' :key='app.id'>
+        <ActiveTask :icon='app.icon' :size='app.size'></ActiveTask>
     </Col>
-    <Col span="1"> 
-    <Badge dot>
-    <Icon type="ios-notifications-outline" size="26"></Icon>
-        </Badge>
-        </Col>
-    <Col span="1"> <Badge dot>
-       <Icon type="ios-notifications-outline" size="26"></Icon>
-        </Badge></Col>
-    <Col span="1"> <Badge dot>
-      <Icon type="ios-notifications-outline" size="26"></Icon>
-        </Badge></Col>
+
+    <Col span="1">
+        <Button>
+            <Icon type="ios-notifications-outline" size="26"></Icon>
+        </Button>
+    </Col>
   </Row>
 </template>
 
 <script>
+import ActiveTask from './ActiveTask/ActiveTask';
 export default {
   name: 'FootBar',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      apps: [
+        {
+          icon:'ios-desktop',
+          size:26,
+          id:1,     
+        },
+        {
+          icon:'ios-cube',
+          size:26,
+          id:2,      
+        },
+      ]
     }
+  },
+  components:{
+    ActiveTask
   }
+
 }
 </script>
 

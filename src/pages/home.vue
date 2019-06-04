@@ -1,7 +1,7 @@
 <template>
     <Layout style='height:100%'>
-        <Content>
-            <router-view/>
+        <Content style='background:#333' id='_content'>
+            <Cabinet :parentBox='this.$refs'></Cabinet>
         </Content>
         <Footer>
             <FootBar></FootBar>
@@ -10,8 +10,9 @@
 </template>
 <script>
     import FootBar from '_comps/FootBar/FootBar';
+    import Cabinet from '_comps/Cabinet/Cabinet';
     export default {
         name:'home',
-        components:{FootBar}
+        components:{FootBar,Cabinet}
     }
 </script>
