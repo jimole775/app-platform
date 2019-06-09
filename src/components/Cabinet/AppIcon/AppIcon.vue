@@ -1,5 +1,5 @@
 <template>
-    <Button type="info" ghost @click='testHover($event)'>
+    <Button type="info" ghost @click='activeApp($event)'>
         <Icon :type='this.icon' :size='this.size'></Icon>
     </Button>
 </template>
@@ -24,7 +24,7 @@ export default {
     }
   },
   methods:{
-    testHover(e){
+    activeApp(e){
         console.log('is hover on this element',e);
     }
   }

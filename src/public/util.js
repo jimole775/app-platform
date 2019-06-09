@@ -3,7 +3,7 @@ export default new class Util{
 
     }
     /**
-     * 把一维数组排列成多维数组
+     * 把一个数组的横向存储变成纵向存储，势必结果会把一维数组转成二维数组
      * @target Array(one-dimensional)
      * @rowLen Number
      * @return Array(multi-dimensional)
@@ -46,16 +46,32 @@ export default new class Util{
      * @return
      * 
      */
-    fillArray(target,rowLen,colLen,element){
+    fillArray(target = [], element = '', rowLen = 1, colLen = 0){
+
         let result = target;
-        let y = rowLen;
-        while(y--){
-            if(!result[y]) result[y] = [];
-            let x = colLen;
-            while(x--){
-                if(!result[y][x]) result[y][x] = element;
+        if(colLen){
+            multiDimonsional(rowLen,colLen);
+        }else{
+            oneDimonsional(rowLen);
+        }
+        
+        function multiDimonsional(y){
+            while(y--){
+                if(!result[y]) result[y] = [];
+                let x = colLen;
+                while(x--){
+                    if(!result[y][x]) result[y][x] = element;
+                }
             }
         }
+
+        function oneDimonsional(y){
+            while(y--){
+                if(!result[y]) result[y] = element;
+            }
+        }
+
+
         return result;
     }
 
