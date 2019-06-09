@@ -4,7 +4,7 @@
        
         <Row v-for='(rowItem,key) in this.renderIcons' :key='key'>      
             <Col span='1' v-for='(colItem,colKey) in rowItem' :style='iconStyle' :key='colKey' @click='testHover()'>
-                <AppIcon :icon='colItem.favicon' :href='colItem.href' draggable='true'>
+                <AppIcon :icon='colItem.favicon' :iframeHref='colItem.href' draggable='true'>
                 </AppIcon>
             </Col>
         </Row>
@@ -121,9 +121,9 @@ export default {
                             if(chcheContainerModel[y]){
                                 let cuttingRow = chcheContainerModel.splice(y,1)[0];
                                 cuttingRow.forEach(function(item){
-                                    if(Object.keys(item).length){
+                                    if(!util.isEmptyObj(item)){
                                         backRollInsert_row(item,y-1);
-                                    }                            
+                                    }                
                                 });
                             }
                         };
@@ -133,7 +133,7 @@ export default {
                             let isInsert = false;
                             let loop = latestRow.length;
                             while(loop--){
-                                if(isObj(latestRow[loop]) && isEmptyObj(latestRow[loop])){
+                                if(util.isObj(latestRow[loop]) && util.isEmptyObj(latestRow[loop])){
                                     isInsert = true;
                                     latestRow[loop] = item;
                                 }
@@ -152,18 +152,18 @@ export default {
                             let x = cacheCols;
                             while(x-- > cols){
                                 const latestItem = yAfterCuttedRow.splice(x,1)[0];
-                                if(isObj(latestItem) && !isEmptyObj(latestItem)){
+                                if(util.isObj(latestItem) && !util.isEmptyObj(latestItem)){
                                     backRollInsert_col(latestItem, chcheContainerModel, yAfterCutted, cols);
                                 }
                             }
                         }
 
-                        function backRollInsert_col(latestItem, chcheContainerModel, loopY, fixedX){                    
+                        function backRollInsert_col(latestItem, chcheContainerModel, loopY, fixedX){ 
                             const latestRow = chcheContainerModel[loopY];
                             let isInsert = false;
                             let loopX = fixedX;
                             while(loopX--){
-                                if(isObj(latestRow[loopX]) && isEmptyObj(latestRow[loopX])){
+                                if(util.isObj(latestRow[loopX]) && util.isEmptyObj(latestRow[loopX])){
                                     latestRow[loopX] = latestItem;
                                     isInsert = true;
                                 }
@@ -182,20 +182,20 @@ export default {
                             
                         let thisLayerY = rows;
                         while(thisLayerY--){
-                            if(!chcheContainerModel[thisLayerY]) chcheContainerModel[thisLayerY] = new Array(rows).fill({});
-                            let thisLayerX = cols;
-                            while(thisLayerX--){                        
-                                if(!chcheContainerModel[thisLayerY][thisLayerX]) chcheContainerModel[thisLayerY][thisLayerX] = {};
+
+                            // 直接填充整行
+                            if(!chcheContainerModel[thisLayerY]) {
+                                chcheContainerModel[thisLayerY] = new Array(rows).fill({});
+                            } 
+                            // 检查填充行内的空盒子
+                            else {
+                                let thisLayerX = cols;
+                                while(thisLayerX--){                        
+                                    if(!chcheContainerModel[thisLayerY][thisLayerX]) chcheContainerModel[thisLayerY][thisLayerX] = {};
+                                }
                             }
+                           
                         }
-                    }
-
-                    function isEmptyObj(target){
-                        return isObj(target) && !Object.keys(target).length
-                    }
-
-                    function isObj(target){
-                        return Object.prototype.toString.call(target) === '[object Object]'
                     }
 
                     this.appList = chcheContainerModel.slice();

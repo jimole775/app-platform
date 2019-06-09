@@ -14,17 +14,24 @@ export default class Drag{
      *  hasEdge:
      * }  
      */
-    constructor(usrSetting) {
-        const dragHandle = usrSetting.dragHandle;
-        const dragBox = usrSetting.dragBox;
-        const extendHandle = usrSetting.extendHandle;
-        this.beforeDrag = usrSetting.beforeDrag;
-        this.afterDrag = usrSetting.afterDrag;
-        this.onDrag = usrSetting.onDrag;
-        this.hasEdge = usrSetting.hasEdge;
+    constructor({
+        dragHandle = '',
+        dragBox = '',
+        extendHandle = '',
+        beforeDrag = ()=>{},
+        afterDrag = ()=>{},
+        onDrag = ()=>{},
+        hasEdge = false,
+    }) {
+        // const dragHandle = dragHandle;
+        // const dragBox = dragBox;
+        // const extendHandle = extendHandle;
+        this.beforeDrag = beforeDrag;
+        this.afterDrag = afterDrag;
+        this.onDrag = onDrag;
+        this.hasEdge = hasEdge;
 
         this.init(dragHandle, dragBox, extendHandle);
-        this.ghostBox = this.cloneGhost(this.dragBox);
         this.bindEvents();
     }
 
@@ -65,7 +72,8 @@ export default class Drag{
     }
 
     initBody(dragBox) {
-        this.dragBox = dragBox;
+        this.dragBox = dragBox;      
+        this.ghostBox = this.cloneGhost(dragBox);  
         this.bodyWidth = this.dragBox.clientWidth;
         this.bodyHeight = this.dragBox.clientHeight;
     }
@@ -104,7 +112,7 @@ export default class Drag{
             that.originY = that.dragBox.offsetTop;   // 相对于当前窗口Y轴的偏移量
             that.distanceX = that.startX - that.originX;   // 鼠标所能移动的最左端是当前鼠标距div左边距的位置
             that.distanceY = that.startY - that.originY;
-
+            that.ghostBox = that.cloneGhost(that.dragBox);
             if (that.beforeDrag) that.beforeDrag(that, e);
         });
     }
@@ -240,9 +248,8 @@ export default class Drag{
     }
 
     dragEndEvent(that, e) {
-        var bodyLeft = that.ghostBox.offsetLeft;
-        var bodyTop = that.ghostBox.offsetTop;
-
+        var bodyLeft = that.ghostBox.offsetLeft + "px";
+        var bodyTop = that.ghostBox.offsetTop + "px";
         if (that.hasEdge) {
             if (bodyTop < 0) {
                 bodyTop = 0;
@@ -258,10 +265,10 @@ export default class Drag{
                 bodyTop = (that.winWidth - that.bodyWidth) + "px";
             }
         }
+        that.dragBox.style.left = bodyLeft;
+        that.dragBox.style.top = bodyTop;
 
-        that.dragBox.offsetLeft = bodyLeft;
-        that.dragBox.offsetTop = bodyTop;
-
+        that.removeGhost();
         if (that.afterDrag) that.afterDrag(that, e);
     }
 
@@ -323,12 +330,19 @@ export default class Drag{
     }
 
     cloneGhost(target){
+        this.removeGhost();
         const box = document.createElement('div');
-        box.style.width = target.clientWidth;
-        box.style.height = target.clientHeight;
-        box.style.border = '2px solid rgba(0,0,0,0.5)';
+        box.id = '_appPlatform_dragGhost';
+        box.style.width = target.clientWidth + 'px';
+        box.style.height = target.clientHeight + 'px';
+        box.style.border = '4px solid rgba(200,200,200,0.7)';
         box.style.position = 'fixed';
         document.body.appendChild(box);
         return box;
+    }
+
+    removeGhost(){
+        const ghost = document.querySelector('#_appPlatform_dragGhost');
+        ghost && ghost.remove();
     }
 }

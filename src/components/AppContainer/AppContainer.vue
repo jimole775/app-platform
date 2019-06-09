@@ -6,7 +6,7 @@
                 <Button class='btn-close' icon="ios-close"></Button>
             </ButtonGroup>
         </header>  
-        <iframe class='iframe-default' :src='href' :style='style'></iframe> 
+        <iframe class='iframe-default' :src='iframeHref' :style='iframeStyle'></iframe> 
     </div>    
 </template>
 <script>
@@ -22,27 +22,20 @@ export default {
         }
     },
     props:{
-        href:{
+        iframeHref:{
             type:String,
             default:'http://localhost:80'
         },
-        style:{
+        iframeStyle:{
             type:Object,
-            default:{
-            }
+            default(){return {}}
         }
     },
     computed:{
-        mixinStyle(){
-            const defaultStyle = {      
-            };
-
-            return Object.assign(this.style,defaultStyle);
-        }
     },
     mounted(){
         this.$nextTick(()=>{
-            new Drag({dragBox:'.iframe-box',dragHandle:'.hand-bar'});
+            new Drag({dragBox:'.iframe-box', dragHandle:'.hand-bar'});
         });
     }
 }

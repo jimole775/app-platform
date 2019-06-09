@@ -75,4 +75,14 @@ export default new class Util{
         return result;
     }
 
+    isEmptyObj(target){
+        for(let name in target){
+            return false;
+        }
+        return true
+    }
+
+    isObj(target){
+        return Object.prototype.toString.call(target) === '[object Object]'
+    }
 }

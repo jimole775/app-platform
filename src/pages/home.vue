@@ -3,7 +3,6 @@
         <Content style='background:#333' id='_content'>
             <Cabinet :parentBox='this.$refs'></Cabinet>
             <AppContainer></AppContainer>
-            <AppContainer></AppContainer>
         </Content>
         <Footer>
             <FootBar></FootBar>
