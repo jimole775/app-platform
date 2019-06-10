@@ -73,7 +73,7 @@ export default class Drag{
 
     initBody(dragBox) {
         this.dragBox = dragBox;      
-        this.ghostBox = this.cloneGhost(dragBox);  
+        this.ghostBox = null;  
         this.bodyWidth = this.dragBox.clientWidth;
         this.bodyHeight = this.dragBox.clientHeight;
     }
@@ -335,6 +335,8 @@ export default class Drag{
         box.id = '_appPlatform_dragGhost';
         box.style.width = target.clientWidth + 'px';
         box.style.height = target.clientHeight + 'px';
+        box.style.top = target.offsetTop + 'px';
+        box.style.left = target.offsetLeft + 'px';
         box.style.border = '4px solid rgba(200,200,200,0.7)';
         box.style.position = 'fixed';
         document.body.appendChild(box);

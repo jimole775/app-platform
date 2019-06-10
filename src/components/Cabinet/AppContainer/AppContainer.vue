@@ -1,8 +1,9 @@
 <template>
-    <div class='iframe-box'>
+    <div class='iframe-box' v-show='!isMinimized' v-if='!isClosed'>
         <header class='hand-bar'>
+            <div class='drag-handle'></div>
             <ButtonGroup class='hand-btns'>
-                <Button icon="ios-remove"></Button>
+                <Button icon="ios-remove" @click='doMinimized()'></Button>
                 <Button class='btn-close' icon="ios-close"></Button>
             </ButtonGroup>
         </header>  
@@ -12,13 +13,13 @@
 <script>
 // 使用iframe用作每个App的容器
 // 每个容器必须要实时获取App的尺寸，以调整自身的状态
-
+import {mapActions,mapMutations} from 'vuex';
 import Drag from '_pub/Drag';
 export default {
     name:'appContainer',
     data(){
         return{
-
+            isClosed:false
         }
     },
     props:{
@@ -32,11 +33,18 @@ export default {
         }
     },
     computed:{
+        isMinimized(){
+            console.log('isMinimized:',this.$store.state.minimizedState);
+            return this.$store.state.minimizedState;
+        }
     },
     mounted(){
         this.$nextTick(()=>{
-            new Drag({dragBox:'.iframe-box', dragHandle:'.hand-bar'});
+            new Drag({dragBox:'.iframe-box', dragHandle:'.drag-handle'});
         });
+    },
+    methods:{
+        ...mapActions(['doMinimized'])
     }
 }
 
@@ -82,6 +90,14 @@ export default {
 
     .hand-btns button.btn-close:hover{
         background: rgba(253, 0, 0, 0.7);
+    }
+
+    .drag-handle{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
     }
 </style> 
 

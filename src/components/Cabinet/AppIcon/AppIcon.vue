@@ -17,7 +17,10 @@ export default {
     size:{
       type:Number,
       default:26,
-    },    
+    },  
+    iframeHref:{
+      type:String
+    }  
   },
   data () {
     return {

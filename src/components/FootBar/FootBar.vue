@@ -22,7 +22,7 @@ export default {
         {
           icon:'ios-desktop',
           size:26,
-          id:1,     
+          id:1,
         },
         {
           icon:'ios-cube',

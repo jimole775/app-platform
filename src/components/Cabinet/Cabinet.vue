@@ -2,8 +2,8 @@
    
     <div ref='_cabinet' @dragstart='drag($event)' @drop='drop($event)' @dragover='allowDrop($event)'>    
        
-        <Row v-for='(rowItem,key) in this.renderIcons' :key='key'>      
-            <Col span='1' v-for='(colItem,colKey) in rowItem' :style='iconStyle' :key='colKey' @click='testHover()'>
+        <Row v-for='(rowItem,key) in renderIcons' :key='key'>      
+            <Col span='1' v-for='(colItem,colKey) in rowItem' :style='iconStyle' :key='colKey'>
                 <AppIcon :icon='colItem.favicon' :iframeHref='colItem.href' draggable='true'>
                 </AppIcon>
             </Col>
@@ -13,27 +13,40 @@
             <!--当前元素只是作用计算屏幕容量的-->
             <Icon type="ios-disc" />
         </Button>
+
+        <div v-for='app in appActiveds'>
+            <AppContainer :show='app.iShow' :if='app.isActive'></AppContainer>
+        </div>
+
     </div>
 </template>
 
 <script>
-import emulationData from '_pub/apps.info.json';
+
+import AppContainer from '_comps/Cabinet/AppContainer/AppContainer';
+import {mapMutations} from 'vuex';
+import emulationData from '_pub/Apps.info.json';
 import AppIcon from '_comps/Cabinet/AppIcon/AppIcon';
 import util from '_pub/Util';
 import storage from '_pub/Storage';
 
 export default {
   name: 'Cabinet',
-  components:{AppIcon},
+  components:{AppIcon,AppContainer},
   data () {
     return {
-        appList:storage.getItem('_appContainerModel') || emulationData,
+        // appInfo:storage.getItem('_appContainerModel') || emulationData,
+        appActiveds:[],
         iconStyle:{
             height:'',
             width:''
         },
-        dragCordinate:{x:0,y:0},
-        dropCordinate:{x:0,y:0},
+        cordinate:{
+            drag:{x:0,y:0},
+            drop:{x:0,y:0},
+        }
+        // dragCordinate:{x:0,y:0},
+        // dropCordinate:{x:0,y:0},
     }
   },
   props:{
@@ -42,19 +55,15 @@ export default {
       }
   },
   methods:{
-      testHover(e){
-          console.log('is hover on this element',e);
-      },
+      ...mapMutations(['appInfoUpdate','dropTransfer','resetAppInfo']),
       drag(e){
         let target = e.target;        
-        this.dragCordinate = this.countCordinate(target);
-        console.log('drag:',target.className,this.dragCordinate)
+        this.cordinate.drag = this.countCordinate(target);
       },
       drop(e){
         let target = e.target;
-        this.dropCordinate = this.countCordinate(target);
-        this.dropTransfer(this.dragCordinate,this.dropCordinate);
-        console.log('drag:',target.className,this.dropCordinate)
+        this.cordinate.drop = this.countCordinate(target);
+        this.dropTransfer(this.cordinate);
       },
       allowDrop(e){
         e.preventDefault();
@@ -73,15 +82,17 @@ export default {
             y:Array.prototype.indexOf.call(rowContainer.children,theRow)
         }
       },
-      dropTransfer(dragCordinate,dropCordinate){
+    //   dropTransfer(dragCordinate,dropCordinate){
           // 交换位置，并存储到本地
-          const dragItem = this.appList[dragCordinate.y][dragCordinate.x] || {};
-          const dropItem = this.appList[dropCordinate.y][dropCordinate.x] || {};
-          this.appList[dropCordinate.y][dropCordinate.x] = dragItem;
-          this.appList[dragCordinate.y][dragCordinate.x] = dropItem;
-          this.appList = this.appList.slice();
-          storage.setItem('_appContainerModel',this.appList);
-      },
+        //   const dragItem = this.appInfo[dragCordinate.y][dragCordinate.x] || {};
+        //   const dropItem = this.appInfo[dropCordinate.y][dropCordinate.x] || {};
+        //   this.appInfo[dropCordinate.y][dropCordinate.x] = dragItem;
+        //   this.appInfo[dragCordinate.y][dragCordinate.x] = dropItem;
+        //   this.appInfoUpdate(curContainerModel.slice());
+
+        //   this.appInfo = this.appInfo.slice();
+        //   storage.setItem('_appContainerModel',this.appInfo);
+    //   },
       refreshCabinet(){
            this.$nextTick(()=>{
                 const contentContainer = document.querySelector('#_content') || document.body;
@@ -98,22 +109,24 @@ export default {
                 const cols = (contentClientRect.width - moWidth) / capacityWidth;
 
                 this.iconStyle.height = (moHeight / rows + capacityHeight) + 'px';
-                this.iconStyle.width = (moWidth / cols + capacityWidth) + 'px'; 
+                this.iconStyle.width = (moWidth / cols + capacityWidth) + 'px';
                 const chcheContainerModel = storage.getItem('_appContainerModel');
-                const curContainerModel = util.fillArray(util.rowToCol(emulationData,rows),{},rows,cols);
-                if(!chcheContainerModel){
+                debugger;
+                if(!chcheContainerModel || !chcheContainerModel.length){
                     // 如果没有缓存，就使用默认的盒子模型
-                    this.appList = curContainerModel.slice();
+                    const defaultContainerModel = util.fillArray(util.rowToCol(emulationData,rows),{},rows,cols);
+                    this.appInfoUpdate(defaultContainerModel);
                 }else{
+                    
+                    const contentContainers = rows * cols;
+                    const cacheCols = chcheContainerModel[0].length;
+                    const cacheRows = chcheContainerModel.length;
                     // 如果有缓存了，需要根据当前的屏幕尺寸，重新规划盒子模型
                     // 分两种情况:
                     // 1. 窗口缩小了，需要裁掉缓存的模型，
                     // 裁掉的部分，如果有APP，就把它塞进附近位置
                     // todo 如果所有盒子都装满了App，缩小屏幕后，有溢出的部分，用另一个列表装起来，放在底部栏
-                    const contentContainers = rows * cols;
-                    const cacheCols = chcheContainerModel[0].length;
-                    const cacheRows = chcheContainerModel.length;
-                    if(rows * cols < cacheCols * cacheRows){
+                    if(contentContainers < cacheCols * cacheRows){
                         let overStackStore = [];
                         let y = cacheRows;
                         // 裁剪行
@@ -178,14 +191,14 @@ export default {
                     }
                     
                     // 2. 窗口扩大了，需要填充模型
-                    if(rows * cols > cacheCols * cacheRows){
+                    if(contentContainers > cacheCols * cacheRows){
                             
                         let thisLayerY = rows;
                         while(thisLayerY--){
 
                             // 直接填充整行
                             if(!chcheContainerModel[thisLayerY]) {
-                                chcheContainerModel[thisLayerY] = new Array(rows).fill({});
+                                chcheContainerModel[thisLayerY] = new Array(cols).fill({});
                             } 
                             // 检查填充行内的空盒子
                             else {
@@ -198,14 +211,14 @@ export default {
                         }
                     }
 
-                    this.appList = chcheContainerModel.slice();
+                    this.appInfoUpdate(chcheContainerModel);
                 }
             });  
       }
   },
   computed:{     
       renderIcons(){          
-          return this.appList;
+          return this.$store.state.appInfo;
       }
   },
 
@@ -218,7 +231,7 @@ export default {
     window.onresize = function(){  
         if(resizeSwitch){
             resizeSwitch = false;     
-            that.appList = []; //避免重复填充   
+            that.resetAppInfo() //避免重复填充  
             that.refreshCabinet();
             setTimeout(function(){ 
                 resizeSwitch = true; //避免刷新过快，性能浪费 

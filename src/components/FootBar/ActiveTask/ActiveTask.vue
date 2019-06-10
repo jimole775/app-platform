@@ -1,10 +1,14 @@
 <template>
-    <Badge dot>
-        <Icon :type='this.icon' :size='this.size'></Icon>
-    </Badge>
+    <Button @click='minimzReplenish()'>
+        <Badge dot>
+            <Icon :type='this.icon' :size='this.size'></Icon>
+        </Badge>
+    </Button>
 </template>
 
 <script>
+import {mapActions} from 'vuex';
+
 export default {
   name: 'ActiveTask',
   props:{
@@ -16,10 +20,20 @@ export default {
     size:{
       type:Number,
       default:26,
-    },    
+    },
   },
   data () {
     return {
+    }
+  },
+  methods:{
+    ...mapActions(['doMinimized','reverseMinimized']),
+    minimzReplenish(){
+      if(this.$store.state.minimizedState){
+        this.reverseMinimized();
+      }else{
+        this.doMinimized();
+      }
     }
   }
 }
