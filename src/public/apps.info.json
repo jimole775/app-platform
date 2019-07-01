@@ -1,20 +1,22 @@
 [
     {
-        "name":"RemoteController",
-        "href":"http://localhost:8081",
-        "favicon":"ios-analytics-outline",
+        "name":"test",
+        "href":"https://www.baidu.com",
+        "favicon":"https://www.baidu.com/favicon.ico",
         "external":"http://localhost:8081/external.js",
         "vuex":"http://localhost:8081/storage/vuex",
+        "iClose":false,
         "iShow":false,
-        "isActive":false
+        "iActive":false
     },
     {
-        "name":"RemoteController2",
-        "href":"http://localhost:8081",
-        "favicon":"ios-analytics",
+        "name":"RemoteController",
+        "href":"http://localhost:80",
+        "favicon":"http://localhost:80/favicon.ico",
         "external":"http://localhost:8081/external.js",
-        "vuex":"http://localhost:8081/storage/vuex",
+        "vuex":"http://localhost:80/storage/vuex",
+        "iClose":false,
         "iShow":false,
-        "isActive":false
+        "iActive":false
     }
 ]

@@ -1,5 +1,5 @@
 <template>
-    <Layout style='height:100%'>
+    <Layout style='height:100%;overflow: hidden;'>
         <Content style='background:#333' id='_content'>
             <Cabinet :parentBox='this.$refs'></Cabinet>
         </Content>

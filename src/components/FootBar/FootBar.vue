@@ -1,44 +1,45 @@
 <template>
   <Row>
-    <Col span="1" v-for='app in apps' :key='app.id'>
-        <ActiveTask :icon='app.icon' :size='app.size'></ActiveTask>
-    </Col>
-
     <Col span="1">
-        <Button>
-            <Icon type="ios-notifications-outline" size="26"></Icon>
+        <Button class="task-container">
+            <Icon type="md-folder" size="22"/>
         </Button>
+    </Col>
+    <Col span="1" v-for='task in activedThreads' :key='task.threadId' v-if="task.threadId || task.threadId === 0">
+        <TaskController :taskItem='task' class="task-container"></TaskController>
     </Col>
   </Row>
 </template>
 
 <script>
-import ActiveTask from './ActiveTask/ActiveTask';
+import {mapActions} from 'vuex'
+import TaskController from './TaskController/TaskController'
 export default {
   name: 'FootBar',
   data () {
     return {
-      apps: [
-        {
-          icon:'ios-desktop',
-          size:26,
-          id:1,
-        },
-        {
-          icon:'ios-cube',
-          size:26,
-          id:2,      
-        },
-      ]
     }
   },
-  components:{
-    ActiveTask
-  }
+  components: {
+    TaskController
+  },
+  computed:{
+    activedThreads() {
+      return this.$store.state.threads
+    }
+  },
+  methods: {
+    ...mapActions(['doExtend', 'doMinimized'])
+  },
 
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    .task-container{
+      width: 2.6rem;
+      height: 2.6rem;
+      padding:0;
+    }
 </style>
