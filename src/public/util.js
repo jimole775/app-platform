@@ -1,6 +1,5 @@
 export default new class Util{
     constructor(){
-
     }
     /**
      * 把一个数组的横向存储变成纵向存储，势必结果会把一维数组转成二维数组

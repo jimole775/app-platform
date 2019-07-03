@@ -30,11 +30,9 @@ export default class Drag{
         this.afterDrag = afterDrag;
         this.onDrag = onDrag;
         this.hasEdge = hasEdge;
-
         this.init(dragHandle, dragBox, extendHandle);
         this.bindEvents();
     }
-
 
     /***************
      * 绑定拖拽事件 *

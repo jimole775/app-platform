@@ -1,8 +1,7 @@
 export default new class Storage{
     constructor(){
         this.storage = window.localStorage;
-    }
-    
+    }    
     setItem(name, data) {
         var finalData = "";
         try {
