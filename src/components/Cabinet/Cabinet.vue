@@ -25,7 +25,7 @@
 
   import ThreadController from '_comps/Cabinet/ThreadController/ThreadController';
   import {mapActions, mapMutations} from 'vuex';
-  import emulationData from '_pub/Apps.info.json';
+  import emulationData from '_pub/apps.info.json';
   import AppIcon from '_comps/Cabinet/AppIcon/AppIcon';
   import util from '_pub/Util';
   import storage from '_pub/Storage';
