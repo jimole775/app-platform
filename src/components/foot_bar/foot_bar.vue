@@ -13,7 +13,7 @@
 
 <script>
 import {mapActions} from 'vuex'
-import TaskController from './TaskController/TaskController'
+import TaskController from './task_controller/task_controller'
 export default {
   name: 'FootBar',
   data () {

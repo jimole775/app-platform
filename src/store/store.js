@@ -1,6 +1,6 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
-import storage from '_pub/Storage'
+import storage from '_pub/storage'
 import emulationData from '_pub/apps.info.json'
 
 Vue.use(Vuex);

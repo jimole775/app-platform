@@ -23,12 +23,12 @@
 
 <script>
 
-  import ThreadController from '_comps/Cabinet/ThreadController/ThreadController';
+  import ThreadController from '_comps/cabinet/thread_controller/thread_controller';
   import {mapActions, mapMutations} from 'vuex';
   import emulationData from '_pub/apps.info.json';
-  import AppIcon from '_comps/Cabinet/AppIcon/AppIcon';
-  import util from '_pub/Util';
-  import storage from '_pub/Storage';
+  import AppIcon from '_comps/cabinet/app_icon/app_icon';
+  import util from '_pub/util';
+  import storage from '_pub/storage';
 
   export default {
     name: 'Cabinet',

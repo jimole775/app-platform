@@ -16,7 +16,7 @@
   // 使用iframe用作每个App的容器
   // 每个容器必须要实时获取App的尺寸，以调整自身的状态
   import {mapActions, mapMutations} from 'vuex';
-  import Drag from '_pub/Drag';
+  import Drag from '_pub/drag';
 
   export default {
     name: 'appContainer',
