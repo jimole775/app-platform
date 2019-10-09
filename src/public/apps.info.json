@@ -12,10 +12,10 @@
     
     {
         "name":"RemoteController",
-        "href":"http://localhost:80",
-        "favicon":"http://localhost:80/favicon.ico",
+        "href":"http://localhost:8081",
+        "favicon":"http://localhost:8081/favicon.ico",
         "external":"http://localhost:8081/external.js",
-        "vuex":"http://localhost:80/storage/vuex",
+        "vuex":"http://localhost:8081/storage/vuex",
         "iClose":false,
         "iShow":false,
         "iActive":false
