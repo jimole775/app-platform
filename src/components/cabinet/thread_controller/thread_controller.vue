@@ -1,5 +1,5 @@
 <template>
-  <div ref='appContainer' class='iframe-box' v-show='appState.iShow' v-if='appState.iActive'>
+  <div ref='appContainer' class='iframe-box' v-show='appState.iActived' v-if='appState.iStarted'>
     <header class='hand-bar'>
       <div class='drag-handle' ref='dragHandle'></div>
       <ButtonGroup class='hand-btns'>

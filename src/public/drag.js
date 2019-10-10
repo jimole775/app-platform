@@ -21,7 +21,7 @@ export default class Drag{
         beforeDrag = ()=>{},
         afterDrag = ()=>{},
         onDrag = ()=>{},
-        hasEdge = false,
+        hasEdge = true,
     }) {
         // const dragHandle = dragHandle;
         // const dragBox = dragBox;
@@ -130,7 +130,6 @@ export default class Drag{
     bindEndEvent() {
         var that = this;
         document.body.addEventListener(that.EVENT_TYPE.END, function (e) {
-
             if (that.dragEvent.dragStart) {
                 that.dragEvent.dragStart = false;
                 that.dragEndEvent(that, e);
@@ -138,7 +137,6 @@ export default class Drag{
                 that.extendEvent.extendStart = false;
                 that.extendEndEvent(that, e);
             }
-
         });
     }
 
@@ -193,7 +191,6 @@ export default class Drag{
     }
 
     dragMoveEvent(that, e) {
-
         // 区分 PC 端和 phone 端的浏览器提供的事件
         var target = e.changedTouches ? e.changedTouches[0] : e;
 
@@ -239,10 +236,8 @@ export default class Drag{
         // if(Math.abs(that.moveX - that.startX) >= 5){
             that.ghostBox.style.left = (that.moveX - that.distanceX) + "px";
             that.ghostBox.style.top = (that.moveY - that.distanceY) + "px";
-
             if (that.onDrag) that.onDrag(that, e);
         // }
-
     }
 
     dragEndEvent(that, e) {
@@ -337,6 +332,7 @@ export default class Drag{
         box.style.left = target.offsetLeft + 'px';
         box.style.border = '4px solid rgba(200,200,200,0.7)';
         box.style.position = 'fixed';
+        box.style.zIndex = '99999';
         document.body.appendChild(box);
         return box;
     }

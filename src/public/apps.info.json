@@ -5,9 +5,10 @@
         "favicon":"https://www.baidu.com/favicon.ico",
         "external":"http://localhost:8081/external.js",
         "vuex":"http://localhost:8081/storage/vuex",
-        "iClose":false,
-        "iShow":false,
-        "iActive":false
+        "iStarted":false,
+        "iDestoryed":false,
+        "iMinimized":false,
+        "iActived":false
     },
     
     {
@@ -16,8 +17,9 @@
         "favicon":"http://localhost:8081/favicon.ico",
         "external":"http://localhost:8081/external.js",
         "vuex":"http://localhost:8081/storage/vuex",
-        "iClose":false,
-        "iShow":false,
-        "iActive":false
+        "iStarted":false,
+        "iDestoryed":false,
+        "iMinimized":false,
+        "iActived":false
     }
 ]

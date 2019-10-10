@@ -39,16 +39,16 @@ export default new Vuex.Store({
   },
   actions: {
     doMinimized(store, threadItem) {
-      threadItem.iShow = false
+      threadItem.iActived = false
     },
     doExtend(store, threadItem) {
-      threadItem.iShow = true
+      threadItem.iActived = true
     },
     doClose(store, threadItem) {
       // 加一个延迟，操作感比较真实
       setTimeout(()=>{
-        threadItem.iActive = false
-        threadItem.iShow = false
+        threadItem.iStarted = false
+        threadItem.iActived = false
         let whillDestoryPosition = 0
         let isEmptyThread = true
         this.state.threads.forEach((threadItem, loopIndex)=>{
@@ -65,8 +65,8 @@ export default new Vuex.Store({
       if(threadItem.href){    
         // 为了远程项目可以开两个线程进行测试
         const cloneItem = JSON.parse(JSON.stringify(threadItem))
-        cloneItem.iActive = true
-        cloneItem.iShow = true
+        cloneItem.iStarted = true
+        cloneItem.iActived = true
         this.commit('threadsUpdate', cloneItem)
       }
     }

@@ -19,9 +19,9 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['doExtend','doMinimized']),   
+    ...mapActions(['doExtend','doMinimized']),
     visibleSwitch(taskItem) {
-      if(taskItem.iShow) {
+      if(taskItem.iActived) {
         this.doMinimized(taskItem)
       }else{
         this.doExtend(taskItem)
