@@ -18,11 +18,12 @@ export default {
   name: 'AppIcon',
   props:{
     size:{
-      type:Number,
-      default:26,
+      type: Number,
+      default: 26,
     },  
     appItem:{
-      type:Object
+      type: Object,
+      default: {} 
     }  
   },
   data () {
