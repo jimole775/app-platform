@@ -17,11 +17,13 @@ export default new Vuex.Store({
       const dropItem = this.state.appInfo[cordinate.drop.y][cordinate.drop.x] || {}
       this.state.appInfo[cordinate.drop.y][cordinate.drop.x] = dragItem
       this.state.appInfo[cordinate.drag.y][cordinate.drag.x] = dropItem
-      this.commit('appInfoUpdate', this.state.appInfo.slice())
+      this.commit('appInfoUpdate', { items: this.state.appInfo.slice() })
     },
-    appInfoUpdate(store, newInfo) {
-      this.state.appInfo = newInfo
+    appInfoUpdate(store, { items, version }) {
+      this.state.appInfo = items
+      if (version) this.state.appVersion = version
       storage.setItem('_appContainerModel', this.state.appInfo)
+      if (version) storage.setItem('_appContainerModel_version', this.state.appVersion)
     },
     threadsDelete(store, position) {
       this.state.threads.splice(position, 1, {})

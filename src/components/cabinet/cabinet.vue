@@ -26,7 +26,6 @@ import emulationData from '_pub/apps.info.json'
 import AppIcon from '_comps/cabinet/app_icon/app_icon'
 import util from '_pub/util'
 import storage from '_pub/storage'
-
 export default {
     name: 'Cabinet',
     components: {
@@ -100,6 +99,10 @@ export default {
           y: Array.prototype.indexOf.call(rowContainer.children, theRow)
         }
       },
+      isModelUpdated() {
+        const old_model_version = storage.getItem('_appContainerModel_version')
+        return old_model_version !== emulationData.version
+      },
       refreshCabinet() {
         const doc = document
         const contentContainer = doc.querySelector('#_content') || doc.body
@@ -129,10 +132,10 @@ export default {
         this.iconStyle.height = (moHeight / rows + capacityHeight) + 'px'
         this.iconStyle.width = (moWidth / cols + capacityWidth) + 'px'
         const chcheContainerModel = storage.getItem('_appContainerModel')
-        if (!chcheContainerModel || !chcheContainerModel.length) {
-          // 如果没有缓存，就使用默认的盒子模型
-          const defaultContainerModel = util.fillArray(util.rowToCol(emulationData, rows), {}, rows, cols)
-          this.appInfoUpdate(defaultContainerModel)
+        if (!chcheContainerModel || !chcheContainerModel.length || this.isModelUpdated()) {
+          // 如果没有缓存，或者数据有更新，就使用默认的盒子模型
+          const defaultContainerModel = util.fillArray(util.rowToCol(emulationData.items, rows), {}, rows, cols)
+          this.appInfoUpdate({items: defaultContainerModel, version: emulationData.version})
         } else {
           const contentContainers = rows * cols
           const cacheCols = chcheContainerModel[0].length
@@ -220,7 +223,8 @@ export default {
               }
             }
           }
-          this.appInfoUpdate(chcheContainerModel)
+          
+          this.appInfoUpdate({ items: chcheContainerModel })
         }
       }
     },

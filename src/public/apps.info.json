@@ -1,8 +1,12 @@
-[
+
+
+{
+    "version": "1.0.0",
+    "items": [
     {
         "name":"test",
-        "href":"https://www.baidu.com",
-        "favicon":"https://www.baidu.com/favicon.ico",
+        "href":"https://m.baidu.com",
+        "favicon":"https://m.baidu.com/favicon.ico",
         "external":"./external.js",
         "vuex":"./storage/vuex",
         "iStarted":false,
@@ -10,7 +14,6 @@
         "iMinimized":false,
         "iActived":false
     },
-    
     {
         "name":"RemoteController",
         "href":"http://localhost:8081",
@@ -23,3 +26,4 @@
         "iActived":false
     }
 ]
+}
