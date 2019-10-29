@@ -30,6 +30,7 @@ export default class Drag{
         this.afterDrag = afterDrag;
         this.onDrag = onDrag;
         this.hasEdge = hasEdge;
+        this.doc = document;
         this.init(dragHandle, dragBox, extendHandle);
         this.bindEvents();
     }
@@ -38,8 +39,8 @@ export default class Drag{
      * 绑定拖拽事件 *
      **************/
     init(dragHandle, dragBox, extendTag) {
-        this.winHeight = document.body.clientHeight;
-        this.winWidth = document.body.clientWidth;
+        this.winHeight = this.doc.body.clientHeight;
+        this.winWidth = this.doc.body.clientWidth;
 
         this.EVENT_TYPE = {};
         this.EVENT_TYPE.START = "ontouchstart" in window ? "touchstart" : "mousedown";
@@ -118,7 +119,7 @@ export default class Drag{
     bindMoveEvent() {
         var that = this;
         // 这里把事件绑到body元素，使移动更加舒服
-        document.body.addEventListener(that.EVENT_TYPE.MOVE, function (e) {
+        this.doc.body.addEventListener(that.EVENT_TYPE.MOVE, function (e) {
             if (that.dragEvent.dragStart) {
                 that.dragMoveEvent(that, e);
             } else if (that.extendEvent.extendStart) {
@@ -129,7 +130,7 @@ export default class Drag{
 
     bindEndEvent() {
         var that = this;
-        document.body.addEventListener(that.EVENT_TYPE.END, function (e) {
+        this.doc.body.addEventListener(that.EVENT_TYPE.END, function (e) {
             if (that.dragEvent.dragStart) {
                 that.dragEvent.dragStart = false;
                 that.dragEndEvent(that, e);
@@ -157,8 +158,8 @@ export default class Drag{
             that.extendEvent.distanceY = startY - that.originY;
 
             // 由于全屏显示的功能的存在，不得不动态获取当前窗口的高宽
-            that.winHeight = document.body.clientHeight;
-            that.winWidth = document.body.clientWidth;
+            that.winHeight = this.doc.body.clientHeight;
+            that.winWidth = this.doc.body.clientWidth;
         });
 
     }
@@ -166,7 +167,7 @@ export default class Drag{
     queryTag(tag, dragHooker) {
         var realTag = null;
         if (typeof tag === "string") {
-            realTag = document.querySelectorAll(tag)[0];
+            realTag = this.doc.querySelectorAll(tag)[0];
         }
         else if (typeof tag === "object") {
             if (tag.nodeType) { // 有nodeType值的,确定是Dom对象
@@ -322,7 +323,7 @@ export default class Drag{
 
     cloneGhost(target){
         this.removeGhost();
-        const box = document.createElement('div');
+        const box = this.doc.createElement('div');
         box.id = '_appPlatform_dragGhost';
         box.style.width = target.clientWidth + 'px';
         box.style.height = target.clientHeight + 'px';
@@ -331,12 +332,12 @@ export default class Drag{
         box.style.border = '4px solid rgba(200,200,200,0.7)';
         box.style.position = 'fixed';
         box.style.zIndex = '99999';
-        document.body.appendChild(box);
+        this.doc.body.appendChild(box);
         return box;
     }
 
     removeGhost(){
-        const ghost = document.querySelector('#_appPlatform_dragGhost');
+        const ghost = this.doc.querySelector('#_appPlatform_dragGhost');
         ghost && ghost.remove();
     }
 }
