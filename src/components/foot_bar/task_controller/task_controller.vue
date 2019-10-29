@@ -1,5 +1,5 @@
 <template>
-    <Button @click='visibleSwitch(taskItem)'>
+    <Button @click="visibleSwitch(taskItem)">
         <img :src="taskItem.favicon" :width="22" :height="22">
     </Button>
 </template>
@@ -21,9 +21,9 @@ export default {
   methods: {
     ...mapActions(['doExtend','doMinimized']),
     visibleSwitch(taskItem) {
-      if(taskItem.iActived) {
+      if (taskItem.iActived) {
         this.doMinimized(taskItem)
-      }else{
+      } else {
         this.doExtend(taskItem)
       }
     }

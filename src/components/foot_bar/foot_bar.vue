@@ -5,14 +5,14 @@
             <Icon type="md-folder" size="22"/>
         </Button>
     </Col>
-    <Col span="1" v-for='task in activedThreads' :key='task.threadId' v-if="task.threadId || task.threadId === 0">
-        <TaskController :taskItem='task' class="task-container"></TaskController>
+    <Col span="1" v-for="task in activedThreads" :key="task.threadId">
+        <TaskController :taskItem="task" class="task-container"></TaskController>
     </Col>
   </Row>
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 import TaskController from './task_controller/task_controller'
 export default {
   name: 'FootBar',
@@ -25,7 +25,13 @@ export default {
   },
   computed:{
     activedThreads() {
-      return this.$store.state.threads
+      const res = []
+      this.$store.state.threads.forEach((task) => {
+        if (task.threadId !== null && task.threadId !== undefined) {
+          res.push(task)
+        }
+      })
+      return res
     }
   },
   methods: {
@@ -41,5 +47,9 @@ export default {
       width: 2.6rem;
       height: 2.6rem;
       padding:0;
+    }
+    
+    .ivu-col.ivu-col-span-1 {
+      min-width: 2.8rem;
     }
 </style>
