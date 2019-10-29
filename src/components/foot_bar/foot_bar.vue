@@ -5,7 +5,7 @@
             <Icon type="md-folder" size="22"/>
         </Button>
     </Col>
-    <Col span="1" v-for="task in activedThreads" :key="task.threadId">
+    <Col span="1" v-for="task in activedThreads" :key="'id_' + task.threadId">
         <TaskController :taskItem="task" class="task-container"></TaskController>
     </Col>
   </Row>
@@ -35,7 +35,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['doExtend', 'doMinimized'])
+    ...mapActions(['reActive', 'doMinimized'])
   },
 
 }

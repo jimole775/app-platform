@@ -10,8 +10,8 @@
       <!--当前元素只是作用计算屏幕容量的-->
       <Icon type="ios-disc" />
     </Button>
-    <div v-for="app in activeApps" :key="app.href">
-      <ThreadController :appItem="app"></ThreadController>
+    <div v-for="threadItem in activeThreads" :key="'id_' + threadItem.threadId">
+      <ThreadController :threadItem="threadItem"></ThreadController>
     </div>
   </div>
 </template>
@@ -59,13 +59,13 @@ export default {
       appInfo() {
         return this.$store.state.appInfo
       },
-      activeApps() {
+      activeThreads() {
         return this.$store.state.threads
       },
     },
     methods: {
       ...mapMutations(['appInfoUpdate', 'dropTransfer', 'resetAppInfo']),
-      ...mapActions(['doActive', 'doClose']),
+      ...mapActions(['doActive', 'doClose', 'doFocus']),
       queryRightElement(src, targetSign) {
         if (src) {
           let srcElement = src
@@ -86,7 +86,6 @@ export default {
         this.dropTransfer(this.cordinate)
       },
       allowDrop(e) {
-        // 启用拖拽的必要操作
         e.preventDefault()
       },
       countCordinate(src) {

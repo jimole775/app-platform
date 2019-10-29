@@ -1,22 +1,29 @@
 <template>
-  <div ref='appContainer' class='iframe-box' v-show='appState.iActived' v-if='appState.iStarted'>
-    <header class='hand-bar'>
-      <div class='drag-handle' ref='dragHandle'></div>
-      <ButtonGroup class='hand-btns'>
-        <Button icon="ios-remove" @click='doMinimized(appItem)'></Button>
-        <Button class='btn-close' icon="ios-close" @click='doClose(appItem)'></Button>
+  <div ref="appContainer" 
+    class="iframe-box" 
+    v-if="threadItem.iStarted"
+    v-show="threadItem.iActived"
+    :style="{zIndex: threadItem.zIndex}"
+    @click.capture="testClick(threadItem)">
+    <header class="hand-bar">
+      <div class="drag-handle" ref="dragHandle"></div>
+      <ButtonGroup class="hand-btns">
+        <Button icon="ios-remove" @click="doMinimized(threadItem)"></Button>
+        <Button class="btn-close" icon="ios-close" @click="doClose(threadItem)"></Button>
       </ButtonGroup>
     </header>
-    <keep-alive>
-        <iframe class='iframe-default' :src='appItem.href'></iframe>    
-    </keep-alive>
+    <div @click="testClick(threadItem)">
+      <keep-alive>
+          <iframe class="iframe-default" :src="threadItem.href"></iframe>    
+      </keep-alive>
+    </div>
   </div>
 </template>
 <script>
   // 使用iframe用作每个App的容器
   // 每个容器必须要实时获取App的尺寸，以调整自身的状态
-  import {mapActions, mapMutations} from 'vuex';
-  import Drag from '_pub/drag';
+  import {mapActions, mapMutations} from 'vuex'
+  import Drag from '_pub/drag'
 
   export default {
     name: 'appContainer',
@@ -24,22 +31,26 @@
       return {}
     },
     props: {
-      appItem: {
-        type: Object
+      threadItem: {
+        type: Object,
+        default: {}
       }
     },
     computed: {
-      appState(){
-        return this.appItem
-      }
+      // appState(){
+      //   return this.threadItem
+      // }
     },
     mounted() {
       this.$nextTick(() => {
-        new Drag({dragBox: this.$refs.appContainer, dragHandle: this.$refs.dragHandle, hasEdge: false});
+        // new Drag({dragBox: this.$refs.appContainer, dragHandle: this.$refs.dragHandle, hasEdge: false})
       });
     },
     methods: {
-      ...mapActions(['doMinimized', 'doClose']),
+      ...mapActions(['doMinimized', 'doClose', 'doFocus']),
+      testClick() {
+        console.log('doFocus')
+      }
     }
   }
 
@@ -61,6 +72,7 @@
     height: 6%;
     width: 100%;
     position: relative;
+    min-height: 28px;
   }
 
   .iframe-default {
