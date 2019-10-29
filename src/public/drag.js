@@ -111,7 +111,7 @@ export default class Drag{
             that.distanceX = that.startX - that.originX;   // 鼠标所能移动的最左端是当前鼠标距div左边距的位置
             that.distanceY = that.startY - that.originY;
             that.ghostBox = that.cloneGhost(that.dragBox);
-            if (that.beforeDrag) that.beforeDrag(that, e);
+            that.beforeDrag && that.beforeDrag(that, e);
         });
     }
 
@@ -230,13 +230,13 @@ export default class Drag{
             || that.moveY <= that.edge.top
             || that.moveX >= that.edge.right
             || that.moveX <= that.edge.left) {
-            that.dragEvent.dragStart = false;
+            // that.dragEvent.dragStart = false;
             console.log("is move out!");
         }
         // if(Math.abs(that.moveX - that.startX) >= 5){
             that.ghostBox.style.left = (that.moveX - that.distanceX) + "px";
             that.ghostBox.style.top = (that.moveY - that.distanceY) + "px";
-            if (that.onDrag) that.onDrag(that, e);
+            that.onDrag && that.onDrag(that, e);
         // }
     }
 
@@ -262,7 +262,7 @@ export default class Drag{
         that.dragBox.style.top = bodyTop;
 
         that.removeGhost();
-        if (that.afterDrag) that.afterDrag(that, e);
+        that.afterDrag && that.afterDrag(that, e);
     }
 
     extendMoveEvent(that, e) {
@@ -287,8 +287,6 @@ export default class Drag{
         that.dragBox.style.width = (that.bodyWidth + (that.moveX - that.extendEvent.distanceX - that.originX)) + "px";
         that.dragBox.style.height = (that.bodyHeight + (that.moveY - that.extendEvent.distanceY - that.originY)) + "px";
 
-
-        //console.log("extend move");
     }
 
     extendEndEvent(that, e) {
