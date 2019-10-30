@@ -61,7 +61,7 @@
     left: 50% - 20rem;
     border-radius: 4px;
     border: 0;
-    box-shadow: 0px 0px 12px #211e1e;
+    box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
   }
 
   .hand-bar {
