@@ -7,6 +7,8 @@ yarn-error.log*
 /test/unit/coverage/
 /test/e2e/reports/
 selenium-debug.log
+yarn.lock
+package-lock.json
 
 # Editor directories and files
 .idea
@@ -15,5 +17,3 @@ selenium-debug.log
 *.ntvs*
 *.njsproj
 *.sln
-yarn.lock
-package-lock.json
