@@ -68,17 +68,11 @@ export default {
     mounted() {
         const that = this
         that.refreshCabinet()
-        let resizeSwitch = true
         window.onresize = function () {
-            if (resizeSwitch) {
-                resizeSwitch = false
-                that.resetAppInfo() //避免重复填充
-                that.refreshCabinet()
-                setTimeout(function () {
-                    resizeSwitch = true //避免刷新过快，性能浪费
-                }, 500)
-                console.log('屏幕尺寸刷新了')
-            }
+          that.$nextTick(() => {
+            that.resetAppInfo() //避免重复填充
+            that.refreshCabinet()
+          })
         }
     },
     created() {},
@@ -130,7 +124,8 @@ export default {
         const contentClientRect = {
           width: doc.body.clientWidth,
           height: doc.body.clientHeight - footer.clientHeight,
-        };
+        }
+        
         const iconConsult = this.$refs._iconConsult.$el || {
           getBoundingClientRect: () => {
             return {
