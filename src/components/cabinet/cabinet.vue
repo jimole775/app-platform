@@ -32,6 +32,11 @@ export default {
       AppIcon,
       ThreadController
     },
+    props: {
+      parentBox: {
+        type: Object
+      }
+    },
     data() {
       return {
         iconStyle: {
@@ -50,19 +55,33 @@ export default {
         }
       }
     },
-    props: {
-      parentBox: {
-        type: Object
-      }
-    },
+    watch: {},
     computed: {
       appInfo() {
         return this.$store.state.appInfo
       },
       activeThreads() {
+        // console.log(this.$store.state.threads)
         return this.$store.state.threads
       },
     },
+    mounted() {
+        const that = this
+        that.refreshCabinet()
+        let resizeSwitch = true
+        window.onresize = function () {
+            if (resizeSwitch) {
+                resizeSwitch = false
+                that.resetAppInfo() //避免重复填充
+                that.refreshCabinet()
+                setTimeout(function () {
+                    resizeSwitch = true //避免刷新过快，性能浪费
+                }, 500)
+                console.log('屏幕尺寸刷新了')
+            }
+        }
+    },
+    created() {},
     methods: {
       ...mapMutations(['appInfoUpdate', 'dropTransfer', 'resetAppInfo']),
       ...mapActions(['doActive', 'doClose', 'doFocus']),
@@ -227,24 +246,6 @@ export default {
         }
       }
     },
-
-    watch: {},
-    mounted() {
-        const that = this
-        that.refreshCabinet()
-        let resizeSwitch = true
-        window.onresize = function () {
-            if (resizeSwitch) {
-                resizeSwitch = false
-                that.resetAppInfo() //避免重复填充
-                that.refreshCabinet()
-                setTimeout(function () {
-                    resizeSwitch = true //避免刷新过快，性能浪费
-                }, 500)
-                console.log('屏幕尺寸刷新了')
-            }
-        }
-    }
 }
 </script>
 
