@@ -27,7 +27,7 @@ export default new Vuex.Store({
       if (version) storage.setItem('_appContainerModel_version', state.appVersion)
     },
     threadsDelete(state, position) {
-      state.threads.splice(position, 1, {})
+      state.threads.splice(position, 1)
       this.commit('focusingLastActiveThread')
     },
     threadsCreate(state, thread) {
@@ -101,8 +101,8 @@ export default new Vuex.Store({
         threadItem.iTop = false
         let whillDestoryPosition = 0
         let isEmptyThread = true
-        this.state.threads.forEach((threadItem, loopIndex)=>{
-          if(threadItem.threadId === threadItem.threadId){
+        this.state.threads.forEach((loopItem, loopIndex)=>{
+          if(loopItem.threadId === threadItem.threadId){
             whillDestoryPosition = loopIndex
             isEmptyThread = false
           }
@@ -113,7 +113,7 @@ export default new Vuex.Store({
     },
     doActive(store, threadItem) {
       if (threadItem.href) {
-        // 为了远程项目可以开两个线程进行测试
+        // 为了远程项目可以开两个相同线程进行测试
         const cloneItem = JSON.parse(JSON.stringify(threadItem))
         cloneItem.iStarted = true
         cloneItem.iActived = true
