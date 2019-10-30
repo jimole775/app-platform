@@ -4,19 +4,17 @@
     v-if="threadItem.iStarted"
     v-show="threadItem.iActived"
     :style="{zIndex: threadItem.zIndex}"
-    @click.capture="testClick(threadItem)">
+    @mouseenter="doFocus(threadItem)">
     <header class="hand-bar">
       <div class="drag-handle" ref="dragHandle"></div>
       <ButtonGroup class="hand-btns">
-        <Button icon="ios-remove" @click="doMinimized(threadItem)"></Button>
-        <Button class="btn-close" icon="ios-close" @click="doClose(threadItem)"></Button>
+        <Button icon="ios-remove" @click.native="doMinimized(threadItem)"></Button>
+        <Button class="btn-close" icon="ios-close" @click.native="doClose(threadItem)"></Button>
       </ButtonGroup>
     </header>
-    <div @click="testClick(threadItem)">
-      <keep-alive>
-          <iframe class="iframe-default" :src="threadItem.href"></iframe>    
-      </keep-alive>
-    </div>
+    <keep-alive>
+        <iframe class="iframe-default" :src="threadItem.href"></iframe>    
+    </keep-alive>
   </div>
 </template>
 <script>
@@ -28,7 +26,8 @@
   export default {
     name: 'appContainer',
     data() {
-      return {}
+      return {
+      }
     },
     props: {
       threadItem: {
@@ -43,14 +42,11 @@
     },
     mounted() {
       this.$nextTick(() => {
-        // new Drag({dragBox: this.$refs.appContainer, dragHandle: this.$refs.dragHandle, hasEdge: false})
+        new Drag({dragBox: this.$refs.appContainer, dragHandle: this.$refs.dragHandle, hasEdge: false})
       });
     },
     methods: {
       ...mapActions(['doMinimized', 'doClose', 'doFocus']),
-      testClick() {
-        console.log('doFocus')
-      }
     }
   }
 
