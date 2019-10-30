@@ -73,8 +73,8 @@ export default class Drag{
     initBody(dragBox) {
         this.dragBox = dragBox;      
         this.ghostBox = null;  
-        this.bodyWidth = this.dragBox.clientWidth;
-        this.bodyHeight = this.dragBox.clientHeight;
+        this.bodyWidth = this.dragBox ? this.dragBox.clientWidth : 0;
+        this.bodyHeight = this.dragBox ? this.dragBox.clientHeight : 0;
     }
 
     initDrag(dragHandle) {
@@ -165,30 +165,35 @@ export default class Drag{
     }
 
     queryTag(tag, dragHooker) {
-        var realTag = null;
-        if (typeof tag === "string") {
-            realTag = this.doc.querySelectorAll(tag)[0];
-        }
-        else if (typeof tag === "object") {
-            if (tag.nodeType) { // 有nodeType值的,确定是Dom对象
-                realTag = tag;
-            } else {    // 否则是jqLit对象
-                realTag = tag[0];
+        try {
+            
+            var realTag = null;
+            if (typeof tag === "string") {
+                realTag = this.doc.querySelectorAll(tag)[0];
             }
+            else if (typeof tag === "object") {
+                if (tag.nodeType) { // 有nodeType值的,确定是Dom对象
+                    realTag = tag;
+                } else {    // 否则是jqLit对象
+                    realTag = tag[0];
+                }
+            }
+
+            if (realTag && dragHooker) {
+
+                realTag.style.cursor = "move";
+                realTag.style["-webkit-touch-callout"] = "none";
+                realTag.style["-webkit-user-select"] = "none";
+                realTag.style["-khtml-user-select"] = "none";
+                realTag.style["-moz-user-select"] = "none";
+                realTag.style["-ms-user-select"] = "none";
+                realTag.style["user-select"] = "none";
+            }
+
+            return realTag;
+        } catch (error) {
+            return null;            
         }
-
-        if (realTag && dragHooker) {
-
-            realTag.style.cursor = "move";
-            realTag.style["-webkit-touch-callout"] = "none";
-            realTag.style["-webkit-user-select"] = "none";
-            realTag.style["-khtml-user-select"] = "none";
-            realTag.style["-moz-user-select"] = "none";
-            realTag.style["-ms-user-select"] = "none";
-            realTag.style["user-select"] = "none";
-        }
-
-        return realTag;
     }
 
     dragMoveEvent(that, e) {
