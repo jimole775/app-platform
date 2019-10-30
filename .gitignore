@@ -15,4 +15,5 @@ selenium-debug.log
 *.ntvs*
 *.njsproj
 *.sln
-*.lock
+yarn.lock
+package-lock.json
