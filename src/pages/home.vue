@@ -1,6 +1,6 @@
 <template>
     <Layout class="home-layout">
-        <Content style="background:#333" id="_content" class="home-content">
+        <Content id="_content" class="home-content">
             <Cabinet :parentBox="this.$refs"></Cabinet>
         </Content>
         <Footer class="home-footer">
