@@ -43,7 +43,7 @@
     mounted() {
       this.$nextTick(() => {
         new Drag({dragBox: this.$refs.appContainer, dragHandle: this.$refs.dragHandle, hasEdge: false})
-      });
+      })
     },
     methods: {
       ...mapActions(['doMinimized', 'doClose', 'doFocus']),
