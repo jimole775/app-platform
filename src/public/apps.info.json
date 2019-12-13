@@ -1,10 +1,10 @@
 
 
 {
-    "version": "1.0.3",
+    "version": "1.0.4",
     "items": [
     {
-        "name":"test",
+        "name":"baidu",
         "href":"https://m.baidu.com",
         "favicon":"https://m.baidu.com/favicon.ico",
         "external":"./external.js",
@@ -23,6 +23,21 @@
         "href":"http://localhost:8081",
         "favicon":"./favicon.ico",
         "external":"./external.js",
+        "vuex":"./storage/vuex",
+        "iStarted":false,
+        "iDestoryed":false,
+        "iMinimized":false,
+        "iActived":false,
+        "iFocused":false,
+        "iTop":false,
+        "zIndex":0,
+        "threadId":0
+    },
+    {
+        "name":"csdn",
+        "href":"https://www.csdn.net",
+        "favicon":"https://www.csdn.net/favicon.ico",
+        "external":"https://www.csdn.net/external.js",
         "vuex":"./storage/vuex",
         "iStarted":false,
         "iDestoryed":false,
