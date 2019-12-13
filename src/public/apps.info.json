@@ -1,0 +1,37 @@
+
+
+{
+    "version": "1.0.3",
+    "items": [
+    {
+        "name":"test",
+        "href":"https://m.baidu.com",
+        "favicon":"https://m.baidu.com/favicon.ico",
+        "external":"./external.js",
+        "vuex":"./storage/vuex",
+        "iStarted":false,
+        "iDestoryed":false,
+        "iMinimized":false,
+        "iActived":false,
+        "iFocused":false,
+        "iTop":false,
+        "zIndex":0,
+        "threadId":0
+    },
+    {
+        "name":"RemoteController",
+        "href":"http://localhost:8081",
+        "favicon":"./favicon.ico",
+        "external":"./external.js",
+        "vuex":"./storage/vuex",
+        "iStarted":false,
+        "iDestoryed":false,
+        "iMinimized":false,
+        "iActived":false,
+        "iFocused":false,
+        "iTop":false,
+        "zIndex":0,
+        "threadId":0
+    }
+]
+}
