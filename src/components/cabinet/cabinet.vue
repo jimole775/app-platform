@@ -70,6 +70,7 @@ export default {
         that.refreshCabinet()
         starFlash(that.$refs._cabinet)
         window.onresize = function () {
+          console.log('window resize!')
           that.$nextTick(() => {
             that.resetAppInfo() //避免重复填充
             that.refreshCabinet()

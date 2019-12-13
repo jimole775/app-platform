@@ -1,48 +1,48 @@
 export default new class Storage{
-    constructor(){
-        this.storage = window.localStorage;
+    constructor() {
+        this.storage = window.localStorage
     }    
     setItem(name, data) {
-        var finalData = "";
+        var finalData = ""
         try {
             if (typeof data === "object") { //如果是object类型，就转成json数据
-                finalData = JSON.stringify(data);
+                finalData = JSON.stringify(data)
             } else {
-                finalData = data;
+                finalData = data
             }
         } catch (e) {
-            throw e.message;
+            throw e.message
         }
         this.storage.setItem(name, finalData)
     }
 
     getItem(name) {
-        var finalData = "";
+        var finalData = ""
         try {
-            var originData = this.storage.getItem(name) || "";
+            var originData = this.storage.getItem(name) || ""
             if (/[\{\[]/.test(originData)) { //判断是否是json数据
-                finalData = JSON.parse(originData);
+                finalData = JSON.parse(originData)
             } else if (originData && originData.length > 0 && typeof originData === "string" && !isNaN(originData)) {
-                finalData = parseFloat(originData);
+                finalData = parseFloat(originData)
             } else if (originData === "null") {
-                finalData = null;
+                finalData = null
             } else if (originData === "undefined") {
-                finalData = undefined;
+                finalData = undefined
             } else if (originData === "true") {
-                finalData = true;
+                finalData = true
             } else if (originData === "false") {
-                finalData = false;
+                finalData = false
             } else {
-                finalData = originData;
+                finalData = originData
             }
         } catch (e) {
-            throw e.message;
+            throw e.message
         }
-        return finalData;
+        return finalData
     }
 
     removeItem(name) {
-        this.storage.removeItem(name);
+        this.storage.removeItem(name)
     }
 }
 
