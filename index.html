@@ -57,7 +57,7 @@
       }</style>
   </head>
   <body>  
-  <script defer="defer">
+  <script>
   (function (win, doc) {
       var temp = [
           '<div id="prevLoad">',
@@ -95,7 +95,8 @@
   })(window, document);
   </script>
   <div id="app"></div>
-  <script>(function () {
+  <!-- <script>(function () {
+    // if (window.localStorage.hadCache) return ''
       // setTimeout(function(){
       // 依赖包加载完成之后，直接设置加载条到100%；
       // 以触发钩子，隐藏加载页面
@@ -108,7 +109,7 @@
           }, 500);
       }, 1000);
       // },35000) //15秒延迟，本地测试时使用
-  })();</script>
+  })();</script> -->
     <!-- built files will be auto injected -->
   </body>
 </html>
