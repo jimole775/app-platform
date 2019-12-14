@@ -55,19 +55,19 @@
           /* font-size: 0.7rem; */
           line-height: 200%;
       }</style>
+    <script>
+        var temp = [
+            '<div id="prevLoad">',
+            '<div class="loadBar">',
+            '<p class="loadingText">loading...</p>',
+            '<i class="filler"></i>',
+            '</div></div>'
+        ].join("");
+        var doc = document;
+        doc.write(temp);
+    </script>
   </head>
   <body>  
-  <script>
-    var temp = [
-        '<div id="prevLoad">',
-        '<div class="loadBar">',
-        '<p class="loadingText">loading...</p>',
-        '<i class="filler"></i>',
-        '</div></div>'
-    ].join("");
-    var doc = document;
-    doc.write(temp);
-  </script>
   <script>
   (function (win, doc) {
       var prevLoad = doc.getElementById("prevLoad");
