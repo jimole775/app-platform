@@ -3,7 +3,7 @@ import Vue from 'vue'
 import storage from '_pub/storage'
 import emulationData from '_pub/apps.info.json'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
@@ -124,6 +124,4 @@ export default new Vuex.Store({
     }
   },
   modules: {}
-});
-
-
+})
