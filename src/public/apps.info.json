@@ -20,7 +20,7 @@
     },
     {
         "name":"RemoteController",
-        "href":"http://localhost:8081",
+        "href":"remote.rongxis.com",
         "favicon":"./favicon.ico",
         "external":"./external.js",
         "vuex":"./storage/vuex",
