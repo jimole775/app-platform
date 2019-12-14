@@ -58,16 +58,18 @@
   </head>
   <body>  
   <script>
+    var temp = [
+        '<div id="prevLoad">',
+        '<div class="loadBar">',
+        '<p class="loadingText">loading...</p>',
+        '<i class="filler"></i>',
+        '</div></div>'
+    ].join("");
+    var doc = document;
+    doc.write(temp);
+  </script>
+  <script>
   (function (win, doc) {
-      var temp = [
-          '<div id="prevLoad">',
-          '<div class="loadBar">',
-          '<p class="loadingText">loading...</p>',
-          '<i class="filler"></i>',
-          '</div></div>'
-      ].join("");
-      var doc = document;
-      doc.write(temp);
       var prevLoad = doc.getElementById("prevLoad");
       var filler = doc.getElementsByClassName("filler")[0];
       var loadBar = doc.getElementsByClassName("loadBar")[0];
@@ -94,7 +96,7 @@
       fill();
   })(window, document);
   </script>
-  <div id="app"></div>
+  <!-- <div id="app"></div> -->
   <!-- <script>(function () {
     // if (window.localStorage.hadCache) return ''
       // setTimeout(function(){
