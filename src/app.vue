@@ -7,8 +7,20 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  mounted(){
+    window.fillerWidth = 100
+    const prevLoad = document.getElementById("prevLoad")
+    setTimeout(function () {   // 给与1S的时间填充满                   
+        prevLoad.style.opacity = 0
+        setTimeout(function () {  // 给与时间fade-out 
+            prevLoad.remove()
+        }, 500)
+    }, 1000)
+  },
+  created(){}
 }
+
 </script>
 
 
