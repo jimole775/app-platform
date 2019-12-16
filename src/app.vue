@@ -10,7 +10,9 @@ export default {
   name: 'App',
   mounted(){
     window.fillerWidth = 100
-    const prevLoad = document.getElementById("prevLoad")
+    const prevLoad = document.querySelector("#prevLoad")
+    const loadingText = document.querySelector(".loadingText")
+    loadingText.innerText = 'completion'
     setTimeout(function () {   // 给与1S的时间填充满                   
         prevLoad.style.opacity = 0
         setTimeout(function () {  // 给与时间fade-out 
