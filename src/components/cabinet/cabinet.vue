@@ -32,11 +32,6 @@ export default {
       AppIcon,
       ThreadController
     },
-    props: {
-      parentBox: {
-        type: Object
-      }
-    },
     data() {
       return {
         iconStyle: {

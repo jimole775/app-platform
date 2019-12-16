@@ -1,7 +1,7 @@
 <template>
     <Layout class="home-layout">
         <Content style="background:#333" id="_content" class="home-content">
-            <Cabinet :parentBox="this.$refs"></Cabinet>
+            <Cabinet/>
         </Content>
         <Footer class="home-footer">
             <FootBar></FootBar>
@@ -17,7 +17,7 @@
     Vue.use(iView)
     export default {
         name:'home',
-        components:{FootBar,Cabinet}
+        components:{ FootBar, Cabinet }
     }
 </script>
 <style scoped>

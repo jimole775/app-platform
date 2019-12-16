@@ -57,8 +57,6 @@
           line-height: 200%;
       }</style>
     <script>
-        console.log(window.localStorage)
-        if (window.localStorage.getItem('hadLoadSource')) return false
         const temp = [
             '<div id="prevLoad">',
             '<div class="loadBar">',
@@ -67,7 +65,6 @@
             '</div></div>'
         ].join("")
         document.write(temp)
-        window.localStorage.setItem('hadLoadSource', true)
     </script>
   <script>
   (function (win, doc) {
