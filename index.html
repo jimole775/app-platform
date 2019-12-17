@@ -1,102 +1,108 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>app-platform</title>
-    <link rel="shortcut icon" type="image/x-icon" href="static/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="static/favicon.ico" />
     <style>
       body {
-          margin: 0;
-          background: rgb(51, 51, 51);
+        margin: 0;
+        background: rgb(51, 51, 51);
       }
+
       #prevLoad {
-          width: 100%;
-          height: 100%;
-          position: fixed;
-          display: flex;
-          align-items: center;
-          flex-direction: row;
-          background: rgb(51, 51, 51);
-          z-index: 999999;
-          color: #fff;
-          transition: 0.5s opacity linear;
-          -moz-transition: 0.5s opacity linear;
-          -webkit-transition: 0.5s opacity linear;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        background: rgb(51, 51, 51);
+        z-index: 999999;
+        color: #fff;
+        transition: 0.5s opacity linear;
+        -moz-transition: 0.5s opacity linear;
+        -webkit-transition: 0.5s opacity linear;
       }
+
       #prevLoad .loadBar {
-          width: 80%;
-          height: auto;
-          border: 1px solid #fff;
-          margin: 0 auto;
-          position: relative;
-          overflow: hidden;
-          transition: 10s opacity linear;
-          -moz-transition: 10s opacity linear;
-          -webkit-transition: 10s opacity linear;
+        width: 80%;
+        height: auto;
+        border: 1px solid #fff;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+        transition: 10s opacity linear;
+        -moz-transition: 10s opacity linear;
+        -webkit-transition: 10s opacity linear;
       }
+
       #prevLoad .filler {
-          position: absolute;
-          width: 0%;
-          height: 100%;
-          box-sizing: border-box;
-          border: 0;
-          display: block;
-          background: #fff;
-          left: 0;
-          top: 0;
-          transition: 10s opacity linear;
-          -moz-transition: 10s opacity linear;
-          -webkit-transition: 10s opacity linear;
+        position: absolute;
+        width: 0%;
+        height: 100%;
+        box-sizing: border-box;
+        border: 0;
+        display: block;
+        background: #fff;
+        left: 0;
+        top: 0;
+        transition: 10s opacity linear;
+        -moz-transition: 10s opacity linear;
+        -webkit-transition: 10s opacity linear;
       }
+
       #prevLoad p.loadingText {
-          text-align: center;
-          padding: 0;
-          margin: 0;
-          /* font-size: 0.7rem; */
-          line-height: 200%;
-      }</style>
-    <script>
-        const temp = [
-            '<div id="prevLoad">',
-            '<div class="loadBar">',
-            '<p class="loadingText">loading...</p>',
-            '<i class="filler"></i>',
-            '</div></div>'
-        ].join("")
-        document.write(temp)
-    </script>
-  <script>
-  (function (win, doc) {
-      const prevLoad = doc.querySelector("#prevLoad")
-      const filler = doc.querySelector(".filler")
-      const loadBar = doc.querySelector(".loadBar")
-      const loadingText = doc.querySelector(".loadingText")
-      win.fillerWidth = 0
-      function fill() {
-          setTimeout(function () {
-              fillerWidth += 1
-              filler.style.width = fillerWidth + "%"
-              if (fillerWidth >= 100) {
-                  fillerWidth = null
-                  filler.style.opacity = 0
-                  setTimeout(function () {
-                      if (loadBar) {
-                          loadBar.style.opacity = 0
-                          loadingText.innerHTML = "网速很慢啊,请切换一下DNS吧 >.<"
-                      }
-                  }, 10000)
-                  return
-              }
-              fill()
-          }, 100)
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        /* font-size: 0.7rem; */
+        line-height: 200%;
       }
-      fill()
-  })(window, document)
-  </script>
+    </style>
+    <script>
+      const temp = [
+        '<div id="prevLoad">',
+        '<div class="loadBar">',
+        '<p class="loadingText">loading...</p>',
+        '<i class="filler"></i>',
+        "</div></div>"
+      ].join("")
+      document.write(temp)
+    </script>
+    <script>
+      (function(win, doc) {
+        const prevLoad = doc.querySelector("#prevLoad")
+        const filler = doc.querySelector(".filler")
+        const loadBar = doc.querySelector(".loadBar")
+        const loadingText = doc.querySelector(".loadingText")
+        win.fillerWidth = 0
+        function fill() {
+          setTimeout(function() {
+            fillerWidth += 1
+            filler.style.width = fillerWidth + "%"
+            if (fillerWidth >= 100) {
+              fillerWidth = null
+              filler.style.opacity = 0
+              setTimeout(function() {
+                if (loadBar) {
+                  loadBar.style.opacity = 0
+                  loadingText.innerHTML = "网速很慢啊,请切换一下DNS吧 >.<"
+                }
+              }, 10000)
+              return
+            }
+            fill()
+          }, 100)
+        }
+        fill()
+      })(window, document)
+    </script>
   </head>
-  <body>  
-  <div id="app"></div>
+
+  <body>
+    <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
 </html>
