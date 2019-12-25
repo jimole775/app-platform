@@ -16,15 +16,21 @@ npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test justtest
+khkfvfkhfvkh
+# run unit tests hkgkhkgh
+npm run unit kgkglk
+khvkhvhi
+# run e2e tests kkfk
+npm run e2e khkk
+jgcjgllkhvk
+# run all tests hfjgj
+npm test justtest jjkckjgu
 ```
-
+jdjdkfhk
+hkfkfkfk
+khfftft
+kyfiuh
+jgjfgfjvh
+gjcjgcjg
+fjgfjgfjg
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
