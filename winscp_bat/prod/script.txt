@@ -1,0 +1,7 @@
+option echo off
+option transfer binary
+open root:lester&775@47.101.67.149:22
+rmdir /usr/local/nginx/html 
+mkdir /usr/local/nginx/html
+synchronize remote -resumesupport=on E:\project\test\app-platform\dist /usr/local/nginx/html
+exit
