@@ -67,28 +67,27 @@
         '<div class="loadBar">',
         '<p class="loadingText">loading...</p>',
         '<i class="filler"></i>',
-        "</div></div>"
-      ].join("")
+        '</div></div>'
+      ].join('')
       document.write(temp)
     </script>
     <script>
       (function(win, doc) {
-        const prevLoad = doc.querySelector("#prevLoad")
-        const filler = doc.querySelector(".filler")
-        const loadBar = doc.querySelector(".loadBar")
-        const loadingText = doc.querySelector(".loadingText")
+        const filler = doc.querySelector('.filler')
+        const loadBar = doc.querySelector('.loadBar')
+        const loadingText = doc.querySelector('.loadingText')
         win.fillerWidth = 0
         function fill() {
           setTimeout(function() {
-            fillerWidth += 1
-            filler.style.width = fillerWidth + "%"
-            if (fillerWidth >= 100) {
-              fillerWidth = null
+            win.fillerWidth += 1
+            filler.style.width = win.fillerWidth + '%'
+            if (win.fillerWidth >= 100) {
+              win.fillerWidth = null
               filler.style.opacity = 0
               setTimeout(function() {
                 if (loadBar) {
                   loadBar.style.opacity = 0
-                  loadingText.innerHTML = "网速很慢啊,请切换一下DNS吧 >.<"
+                  loadingText.innerHTML = '网速很慢啊,请切换一下DNS吧 >.<'
                 }
               }, 10000)
               return
