@@ -1,7 +1,7 @@
 @echo on && setlocal enabledelayedexpansion
 set cur_dist=%~dp0
 set src_git=git@github.com:jimole775/app-platform.git
-set program_dist=E:\project\test
+set program_dist=F:\MyPro
 set program_name=app-platform
 set err_log=%cur_dist%error.log
 set suc_log=%cur_dist%deployed.log
@@ -12,33 +12,34 @@ set ignor[3]=package.json
 set ignor_count=3
 
 cls
-rem Ê×ÏÈ°ÑÐèÒªÐÞ¸ÄµÄÎÄ¼þ½øÐÐ±¸·Ý
-mkdir %program_dist%\_tmp
+cd %program_dist%
+
+rem åˆ›å»ºä¸´æ—¶ç›®å½•
+mkdir _tmp
+rem é¦–å…ˆæŠŠéœ€è¦ä¿®æ”¹çš„æ–‡ä»¶è¿›è¡Œå¤‡ä»½
 for /l %%i in (1,1,%ignor_count%) do (
-copy %program_dist%\%program_name%\!ignor[%%i]! %program_dist%\_tmp\
+copy .\%program_name%\!ignor[%%i]! .\_tmp\
 )
+rem åˆ é™¤é¡¹ç›®èµ„æº
+rd /s /q %program_name%
 
-rem É¾³ýÏîÄ¿×ÊÔ´
-rd /s /q %program_dist%\%program_name%\
-
-rem È»ºóÊ¹ÓÃgit cloneÀ­È¡ÐÂ´úÂë
+rem ç„¶åŽä½¿ç”¨git cloneæ‹‰å–æ–°ä»£ç 
 git clone %src_git%
 
-rem °Ñ±¸·ÝµÄÎÄ¼þ¸²¸Çµ½ÏîÄ¿
+rem æŠŠå¤‡ä»½çš„æ–‡ä»¶è¦†ç›–åˆ°é¡¹ç›®
 for /l %%j in (1,1,%ignor_count%) do (
-copy %program_dist%\_tmp\!ignor[%%j]! %cur_dist%\%program_name%\
+copy .\_tmp\!ignor[%%j]! .\%program_name%\
 )
-
-rem °²×°ÒÀÀµ && build
+rem è¿›å…¥é¡¹ç›®ç›®å½•
 cd %program_name%
-yarn install >> %err_log% 2>&1
-pause
-yarn run build >> %err_log% 2>&1
-pause
 
-rem °Ñtemplate°²×°µ½dist
-rem mkdir .\dist\template
-rem copy %cur_dist%template\. .\dist\template\
+rem å®‰è£…ä¾èµ–
+npm install >> %err_log% 2>&1
+npm run build >> %err_log% 2>&1
+
+rem æŠŠtemplateå®‰è£…åˆ°dist
+mkdir .\dist\template
+copy %cur_dist%template\. .\dist\template\
 winscp /script=%scp_script%
 echo `deploys completion at %time%` >> %suc_log%
 @echo end
