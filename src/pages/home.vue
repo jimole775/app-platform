@@ -11,10 +11,6 @@
 <script>
     import FootBar from '_comps/foot_bar/foot_bar'
     import Cabinet from '_comps/cabinet/cabinet'
-    import iView from 'iview'
-    import Vue from 'vue'
-    import 'iview/dist/styles/iview.css'
-    Vue.use(iView)
     export default {
         name:'home',
         components:{ FootBar, Cabinet }
