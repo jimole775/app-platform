@@ -1,14 +1,17 @@
 <template>
-  <Row>
-    <Col span="1">
-        <Button class="task-container">
-            <Icon type="md-folder" size="22"/>
-        </Button>
-    </Col>
-    <Col span="1" v-for="task in activedThreads" :key="'id_' + task.threadId">
-        <TaskController :taskItem="task" class="task-container"></TaskController>
-    </Col>
-  </Row>
+  <div>
+    <Row>
+      <Col span="1">
+          <Button class="task-container">
+              <Icon type="md-folder" size="22"/>
+          </Button>
+      </Col>
+      <Col span="1" v-for="task in activedThreads" :key="'id_' + task.threadId">
+          <TaskController :taskItem="task" class="task-container"></TaskController>
+      </Col>
+    </Row>
+    © 2019-2025 727346595@qq.com 版权所有 备案号：<a href="https://beian.miit.gov.cn">浙ICP备19013138号-1</a>
+  </div>
 </template>
 
 <script>
