@@ -1,7 +1,7 @@
 
 
 {
-    "version": "1.0.4",
+    "version": "1.0.9",
     "items": [
     {
         "name":"baidu",
@@ -20,9 +20,9 @@
     },
     {
         "name":"RemoteController",
-        "href":"remote.rongxis.com",
-        "favicon":"./favicon.ico",
-        "external":"./external.js",
+        "href":"http://remote.rongxis.com",
+        "favicon":"http://remote.rongxis.com/static/favicon.ico",
+        "external":"http://remote.rongxis.com/static/external.js",
         "vuex":"./storage/vuex",
         "iStarted":false,
         "iDestoryed":false,
@@ -36,7 +36,7 @@
     {
         "name":"csdn",
         "href":"https://www.csdn.net",
-        "favicon":"https://www.csdn.net/favicon.ico",
+        "favicon":"https://g.csdnimg.cn/static/logo/favicon32.ico",
         "external":"https://www.csdn.net/external.js",
         "vuex":"./storage/vuex",
         "iStarted":false,
