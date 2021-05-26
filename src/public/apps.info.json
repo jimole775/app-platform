@@ -1,7 +1,7 @@
 
 
 {
-    "version": "1.0.9",
+    "version": "1.0.12",
     "items": [
     {
         "name":"baidu",
@@ -21,8 +21,8 @@
     {
         "name":"RemoteController",
         "href":"http://remote.rongxis.com",
-        "favicon":"http://remote.rongxis.com/static/favicon.ico",
-        "external":"http://remote.rongxis.com/static/external.js",
+        "favicon":"http://www.rongxis.com:8080/static/favicon.ico",
+        "external":"http://www.rongxis.com:8080/static/external.js",
         "vuex":"./storage/vuex",
         "iStarted":false,
         "iDestoryed":false,
