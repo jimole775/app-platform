@@ -1,11 +1,18 @@
 <template>
-    <Button type="info" ghost @dblclick.native="doActive(appItem)" :class="['app-icon-container', appItem.href ? 'filled' : 'empty']">
+    <Button
+      ghost
+      type="info"
+      :class="['app-icon-container', appItem.href ? 'filled' : 'empty']"
+      @dblclick.native="doActive(appItem)"
+    >
       <img 
-      v-show="appItem.href" 
-      :src="appItem.favicon" 
-      draggable="true"
-      :width="size" 
-      :height="size">
+        v-show="appItem.href"
+        draggable="true"
+        :title="appItem.name"
+        :src="appItem.favicon"
+        :width="size"
+        :height="size"
+      >
     </Button>
 </template>
 
