@@ -17,15 +17,12 @@
 </template>
 
 <script>
-import ThreadController from '_comps/cabinet/thread_controller/thread_controller'
-import {
-    mapActions,
-    mapMutations
-} from 'vuex'
-import emulationData from '_pub/apps.info.json'
-import AppIcon from '_comps/cabinet/app_icon/app_icon'
-import { isEmptyObj, rowToCol, fillArray, isObj, starFlash} from '_pub/util'
-import storage from '_pub/storage'
+import ThreadController from '@comp/cabinet/thread_controller/thread_controller'
+import { mapActions, mapMutations } from 'vuex'
+import emulationData from '@public/apps.info.json'
+import AppIcon from '@comp/cabinet/app_icon/app_icon'
+import { isEmptyObj, rowToCol, fillArray, isObj, starFlash} from '@public/util'
+import storage from '@public/storage'
 export default {
     name: 'Cabinet',
     components: {

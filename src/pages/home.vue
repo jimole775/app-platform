@@ -9,11 +9,11 @@
     </Layout> 
 </template>
 <script>
-    import FootBar from '_comps/foot_bar/foot_bar'
-    import Cabinet from '_comps/cabinet/cabinet'
+    import FootBar from '@comp/foot_bar/foot_bar'
+    import Cabinet from '@comp/cabinet/cabinet'
     export default {
-        name:'home',
-        components:{ FootBar, Cabinet }
+        name: 'home',
+        components: { FootBar, Cabinet }
     }
 </script>
 <style scoped>
