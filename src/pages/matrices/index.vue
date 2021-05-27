@@ -1,8 +1,8 @@
 <template>
   <div ref="_cabinet" @dragstart="drag($event)" @drop="drop($event)" @dragover="allowDrop($event)">
-    <Row v-for="(rowItem, rowKey) in appInfo" :key="rowKey">
-      <Col span="1" v-for="(colItem, colKey) in rowItem" :style="iconStyle" :key="colKey">
-        <AppIcon :appItem="colItem"></AppIcon>
+    <Row v-for="(rowItem, rowKey) in appInfo" :key="rowKey" style="display: table">
+      <Col span="1" v-for="(colItem, colKey) in rowItem" :style="iconStyle" :key="colKey" class="icon-box">
+        <AppIcon :appItem="colItem" />
       </Col>
     </Row>
     <Button ref="_iconConsult" type="info" class="kick-out">
@@ -280,5 +280,10 @@ export default {
   top: 0;
   left: -9999px;
   opacity: 0;
+}
+.icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

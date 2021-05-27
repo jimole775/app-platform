@@ -10,7 +10,11 @@
         <TaskController :taskItem="task" class="task-container"></TaskController>
       </Col>
     </Row>
-    © 2019-2025 727346595@qq.com 版权所有 备案号：<a href="https://beian.miit.gov.cn">浙ICP备19013138号-1</a>
+    <Row>
+      <Col span="24" class="copy-right">
+        © 2019-2025 727346595@qq.com 版权所有 备案号：<a href="https://beian.miit.gov.cn">浙ICP备19013138号-1</a>
+      </Col>
+    </Row>
   </div>
 </template>
 
@@ -52,5 +56,11 @@ export default {
   }
   .ivu-col.ivu-col-span-1 {
     min-width: 2.8rem;
+  }
+  .copy-right {
+    font-size: 0.8rem;
+  }
+  .copy-right > a {
+    font-size: 0.8rem;
   }
 </style>
