@@ -1,21 +1,16 @@
 <template>
-    <Button @click="visibleSwitch(taskItem)" :class="focus(taskItem)">
-        <img :src="taskItem.favicon" :width="22" :height="22">
-    </Button>
+  <Button @click="visibleSwitch(taskItem)" :class="focus(taskItem)">
+    <img :src="taskItem.favicon" :width="22" :height="22">
+  </Button>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
-
 export default {
   name: 'TaskController',
   props: {
     taskItem: {
       type: Object
-    }
-  },
-  data () {
-    return {
     }
   },
   methods: {

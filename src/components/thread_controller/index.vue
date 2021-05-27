@@ -13,7 +13,7 @@
       </ButtonGroup>
     </header>
     <keep-alive>
-        <iframe class="iframe-default" :src="threadItem.href"></iframe>    
+      <iframe class="iframe-default" :src="threadItem.href"></iframe>    
     </keep-alive>
   </div>
 </template>
@@ -22,7 +22,6 @@
   // 每个容器必须要实时获取App的尺寸，以调整自身的状态
   import {mapActions, mapMutations} from 'vuex'
   import Drag from '@public/drag'
-
   export default {
     name: 'appContainer',
     data() {
@@ -49,8 +48,6 @@
       ...mapActions(['doMinimized', 'doClose', 'doFocus']),
     }
   }
-
-
 </script>
 <style rel="stylesheet/less" lang="less" scoped>
   .iframe-box {

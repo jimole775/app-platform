@@ -1,23 +1,22 @@
 <template>
-    <Button
-      ghost
-      type="info"
-      :class="['app-icon-container', appItem.href ? 'filled' : 'empty']"
-      @dblclick.native="doActive(appItem)"
+  <Button
+    ghost
+    type="info"
+    :class="['app-icon-container', appItem.href ? 'filled' : 'empty']"
+    @dblclick.native="doActive(appItem)"
+  >
+    <img 
+      v-show="appItem.href"
+      draggable="true"
+      :title="appItem.name"
+      :src="appItem.favicon"
+      :width="size"
+      :height="size"
     >
-      <img 
-        v-show="appItem.href"
-        draggable="true"
-        :title="appItem.name"
-        :src="appItem.favicon"
-        :width="size"
-        :height="size"
-      >
-    </Button>
+  </Button>
 </template>
 
 <script>
-
 import { mapActions, mapMutations } from 'vuex'
 // TODO 使用sortable进行拖拽管理
 // sortable的主要任务就是，实现拖拽的触发，动画，完成回调
@@ -32,10 +31,6 @@ export default {
       type: Object,
       default: {} 
     }  
-  },
-  data () {
-    return {
-    }
   },
   methods:{
     ...mapActions(['doActive'])
