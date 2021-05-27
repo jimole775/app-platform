@@ -62,5 +62,6 @@ export default {
   }
   .copy-right > a {
     font-size: 0.8rem;
+    text-align: right;
   }
 </style>
