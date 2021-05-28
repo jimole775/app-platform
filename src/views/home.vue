@@ -4,16 +4,18 @@
       <Matrices />
     </Content>
     <Footer class="home-footer">
-      <FootBar></FootBar>
-    </Footer>  
-  </Layout> 
+      <Folder />
+      <FootBar />
+    </Footer>
+  </Layout>
 </template>
 <script>
   import FootBar from '@views/foot_bar/index'
+  import Folder from '@views/folder/index'
   import Matrices from '@views/matrices/index'
   export default {
     name: 'home',
-    components: { FootBar, Matrices }
+    components: { FootBar, Matrices, Folder }
   }
 </script>
 <style scoped>

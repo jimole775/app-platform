@@ -8,10 +8,25 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     appInfo: storage.getItem('_appContainerModel') || emulationData,
+    folder: {
+      name: 'folder',
+      type: 'system',
+      iMinimized: false,
+      iActived: false,
+      iFocused: false,
+      iTop: false,
+      zIndex: 0,
+      threadId: 0
+    },
     threads: [],
     maxZIndex: 100,
   },
   mutations: {
+    updateFolder (state, active) {
+      state.folder.iActived = active
+      state.folder.iFocused = active
+      state.folder.iMinimized = !active
+    },
     dropTransfer(state, cordinate) {
       // 交换位置，并存储到本地
       const dragItem = state.appInfo[cordinate.drag.y][cordinate.drag.x] || {}
@@ -43,25 +58,28 @@ export default new Vuex.Store({
       state.threads.length = 0
     },
     siblingBlur(state) {
-      state.threads && state.threads.forEach((loopItem) => {
+      const threads = (state.threads || []).concat([state.folder])
+      threads.forEach((loopItem) => {
         loopItem.iFocused = false
         loopItem.iTop = false
       })
     },
     focusingLastActiveThread(state) {
-      if (state.threads.length > 0) {
-        let len = state.threads.length
+      const threads = (state.threads || []).concat([state.folder])
+      if (threads.length > 0) {
+        let len = threads.length
         while(len --) {
-          const curThread = state.threads[len]
+          const curThread = threads[len]
           if (curThread.iActived) {
             this.dispatch('doFocus', curThread)
             break
           }
         }
-      }      
+      }
     },
     sequeueLayer(state) {
-      state.threads && state.threads.forEach((threadItem, index) => {
+      const threads = (state.threads || []).concat([state.folder])
+      threads.forEach((threadItem, index) => {
         if (threadItem.iFocused) {
           threadItem.zIndex = state.maxZIndex
         } else {
@@ -71,6 +89,16 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    doActivedFolder () {
+      this.commit('updateFolder', true)
+      this.commit('focusingLastActiveThread')
+      this.commit('sequeueLayer')
+    },
+    doMinimizedFolder () {
+      this.commit('updateFolder', false)
+      this.commit('focusingLastActiveThread')
+      this.commit('sequeueLayer')
+    },
     doMinimized(store, threadItem) {
       threadItem.iActived = false
       threadItem.iMinimized = true
@@ -109,7 +137,7 @@ export default new Vuex.Store({
         })
         if (isEmptyThread) this.commit('resetThreads')
         else this.commit('threadsDelete', whillDestoryPosition)
-      }, 150) 
+      }, 150)
     },
     doActive(store, threadItem) {
       if (threadItem.href) {

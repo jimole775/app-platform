@@ -2,12 +2,12 @@
   <div>
     <Row>
       <Col span="1">
-        <Button class="task-container">
-          <Icon type="md-folder" size="22"/>
+        <Button class="task-container" @dblclick.native="doActivedFolder">
+          <Icon type="md-folder" size="22" />
         </Button>
       </Col>
       <Col span="1" v-for="task in activedThreads" :key="'id_' + task.threadId">
-        <TaskController :taskItem="task" class="task-container"></TaskController>
+        <TaskController :taskItem="task" class="task-container" />
       </Col>
     </Row>
     <Row>
@@ -42,7 +42,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['reActive', 'doMinimized'])
+    ...mapActions(['reActive', 'doMinimized', 'doActivedFolder', 'doMinimizedFolder'])
   },
 }
 </script>

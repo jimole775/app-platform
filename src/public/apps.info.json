@@ -1,52 +1,37 @@
-
-
 {
-    "version": "1.0.12",
-    "items": [
+  "version": "1.0.13",
+  "items": [
     {
-        "name":"baidu",
-        "href":"https://m.baidu.com",
-        "favicon":"https://m.baidu.com/favicon.ico",
-        "external":"./external.js",
-        "vuex":"./storage/vuex",
-        "iStarted":false,
-        "iDestoryed":false,
-        "iMinimized":false,
-        "iActived":false,
-        "iFocused":false,
-        "iTop":false,
-        "zIndex":0,
-        "threadId":0
+      "name":"baidu",
+      "type":"app",
+      "href":"https://m.baidu.com",
+      "favicon":"https://m.baidu.com/favicon.ico",
+      "external":"./external.js",
+      "vuex":"./storage/vuex",
+      "iStarted":false,
+      "iDestoryed":false,
+      "iMinimized":false,
+      "iActived":false,
+      "iFocused":false,
+      "iTop":false,
+      "zIndex":0,
+      "threadId":0
     },
     {
-        "name":"RemoteController",
-        "href":"http://remote.rongxis.com",
-        "favicon":"http://www.rongxis.com:8080/static/favicon.ico",
-        "external":"http://www.rongxis.com:8080/static/external.js",
-        "vuex":"./storage/vuex",
-        "iStarted":false,
-        "iDestoryed":false,
-        "iMinimized":false,
-        "iActived":false,
-        "iFocused":false,
-        "iTop":false,
-        "zIndex":0,
-        "threadId":0
-    },
-    {
-        "name":"csdn",
-        "href":"https://www.csdn.net",
-        "favicon":"https://g.csdnimg.cn/static/logo/favicon32.ico",
-        "external":"https://www.csdn.net/external.js",
-        "vuex":"./storage/vuex",
-        "iStarted":false,
-        "iDestoryed":false,
-        "iMinimized":false,
-        "iActived":false,
-        "iFocused":false,
-        "iTop":false,
-        "zIndex":0,
-        "threadId":0
+      "name":"RemoteController",
+      "type":"app",
+      "href":"http://remote.rongxis.com",
+      "favicon":"http://www.rongxis.com:8080/static/favicon.ico",
+      "external":"http://www.rongxis.com:8080/static/external.js",
+      "vuex":"./storage/vuex",
+      "iStarted":false,
+      "iDestoryed":false,
+      "iMinimized":false,
+      "iActived":false,
+      "iFocused":false,
+      "iTop":false,
+      "zIndex":0,
+      "threadId":0
     }
-]
+  ]
 }

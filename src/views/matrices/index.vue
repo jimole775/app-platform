@@ -10,7 +10,7 @@
       <Icon type="ios-disc" />
     </Button>
     <div v-for="threadItem in activeThreads" :key="'id_' + threadItem.threadId">
-      <ThreadController :threadItem="threadItem"></ThreadController>
+      <ThreadController :threadItem="threadItem" />
     </div>
   </div>
 </template>
@@ -52,7 +52,6 @@ export default {
       }
     };
   },
-  watch: {},
   computed: {
     appInfo() {
       return this.$store.state.appInfo
