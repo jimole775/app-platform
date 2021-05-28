@@ -9,8 +9,8 @@
   </Layout> 
 </template>
 <script>
-  import FootBar from '@pages/foot_bar/index'
-  import Matrices from '@pages/matrices/index'
+  import FootBar from '@views/foot_bar/index'
+  import Matrices from '@views/matrices/index'
   export default {
     name: 'home',
     components: { FootBar, Matrices }

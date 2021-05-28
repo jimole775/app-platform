@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import LoginForm from './form/form'  
+  import LoginForm from './form/index'  
   import {
     mapActions
   } from 'vuex'
