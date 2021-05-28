@@ -22,15 +22,15 @@ import { mapActions, mapMutations } from 'vuex'
 // sortable的主要任务就是，实现拖拽的触发，动画，完成回调
 export default {
   name: 'AppIcon',
-  props:{
-    size:{
+  props: {
+    size: {
       type: Number,
       default: 26,
-    },  
-    appItem:{
+    },
+    appItem: {
       type: Object,
       default: {} 
-    }  
+    }
   },
   methods:{
     ...mapActions(['doActive'])

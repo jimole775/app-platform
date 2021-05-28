@@ -13,7 +13,7 @@
       </ButtonGroup>
     </header>
     <keep-alive>
-      <iframe class="iframe-default" :src="threadItem.href"></iframe>    
+      <iframe class="iframe-default" :src="threadItem.href"></iframe>
     </keep-alive>
   </div>
 </template>
@@ -45,7 +45,7 @@
       })
     },
     methods: {
-      ...mapActions(['doMinimized', 'doClose', 'doFocus']),
+      ...mapActions(['doMinimized', 'doClose', 'doFocus'])
     }
   }
 </script>

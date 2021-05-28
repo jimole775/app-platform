@@ -1,5 +1,5 @@
 <template>
-  <div ref="_cabinet" @dragstart="drag($event)" @drop="drop($event)" @dragover="allowDrop($event)">
+  <div ref="MatricesRef" @dragstart="drag($event)" @drop="drop($event)" @dragover="allowDrop($event)">
     <Row v-for="(rowItem, rowKey) in appInfo" :key="rowKey" style="display: table">
       <Col span="1" v-for="(colItem, colKey) in rowItem" :style="iconStyle" :key="colKey" class="icon-box">
         <AppIcon :appItem="colItem" />
@@ -29,7 +29,7 @@ import {
 } from "@public/util"
 import storage from "@public/storage"
 export default {
-  name: "Cabinet",
+  name: "Matrices",
   components: {
     AppIcon,
     ThreadController
@@ -63,13 +63,13 @@ export default {
   },
   mounted() {
     const that = this
-    that.refreshCabinet()
-    starFlash(that.$refs._cabinet)
+    that.refreshMatrices()
+    starFlash(that.$refs.MatricesRef)
     window.onresize = function() {
       console.log("window resize!")
       that.$nextTick(() => {
         that.resetAppInfo() //避免重复填充
-        that.refreshCabinet()
+        that.refreshMatrices()
       })
     }
   },
@@ -113,7 +113,7 @@ export default {
       const old_model_version = storage.getItem("_appContainerModel_version")
       return old_model_version !== emulationData.version
     },
-    refreshCabinet() {
+    refreshMatrices() {
       const doc = document
       const contentContainer = doc.querySelector("#_content") || doc.body
       const footer = doc.querySelector(".ivu-layout-footer") || {
