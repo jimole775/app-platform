@@ -85,41 +85,41 @@ export function suffix(max) {
 }
 
 export function starFlash(container) {
-    const loop = (container) => {
-        const stars = container.querySelectorAll('button.app-icon-container')
-        const star = stars[suffix(stars.length)]
-        const flashTime = 1000 + suffix(3000)
-        flashStart(star)
-        setTimeout(() => {
-            flashEnd(star)
-            return loop(container)
-        }, flashTime)
+  const loop = (container) => {
+    const stars = container.querySelectorAll('button.app-icon-container')
+    const star = stars[suffix(stars.length)]
+    const flashTime = 1000 + suffix(3000)
+    flashStart(star)
+    setTimeout(() => {
+      flashEnd(star)
+      return loop(container)
+    }, flashTime)
 
-        function flashStart(target) {
-            const base = 1000 + suffix(3000)
-            const duraTimes = base/3000
-            const borderWidth = base/1800
-            const boxShadowSize = base/100
-            target.style['transition'] = `all ${duraTimes}s`
-            target.style['-moz-transition'] = `all ${duraTimes}s`
-            target.style['-webkit-transition'] = `all ${duraTimes}s`
-            target.style['-o-transition'] = `all ${duraTimes}s`
-            target.style.border = `${borderWidth}px solid`
-            target.style.boxShadow = `0 0 ${boxShadowSize}px #fff`
-        }
-        function flashEnd(target) {
-            const base = 1000 + suffix(3000)
-            const duraTimes = base/2000
-            target.style['transition'] = `all ${duraTimes}s`
-            target.style['-moz-transition'] = `all ${duraTimes}s`
-            target.style['-webkit-transition'] = `all ${duraTimes}s`
-            target.style['-o-transition'] = `all ${duraTimes}s`
-            target.style.border = "1px solid"
-            target.style.boxShadow = "0 0 0"
-        }
+    function flashStart(target) {
+      const base = 1000 + suffix(3000)
+      const duraTimes = base/3000
+      const borderWidth = base/1800
+      const boxShadowSize = base/100
+      target.style['transition'] = `all ${duraTimes}s`
+      target.style['-moz-transition'] = `all ${duraTimes}s`
+      target.style['-webkit-transition'] = `all ${duraTimes}s`
+      target.style['-o-transition'] = `all ${duraTimes}s`
+      target.style.border = `${borderWidth}px solid`
+      target.style.boxShadow = `0 0 ${boxShadowSize}px #fff`
     }
-    loop(container)
-    loop(container)
-    loop(container)
-    loop(container)
+    function flashEnd(target) {
+      const base = 1000 + suffix(3000)
+      const duraTimes = base/2000
+      target.style['transition'] = `all ${duraTimes}s`
+      target.style['-moz-transition'] = `all ${duraTimes}s`
+      target.style['-webkit-transition'] = `all ${duraTimes}s`
+      target.style['-o-transition'] = `all ${duraTimes}s`
+      target.style.border = "1px solid"
+      target.style.boxShadow = "0 0 0"
+    }
+  }
+  loop(container)
+  loop(container)
+  loop(container)
+  loop(container)
 }

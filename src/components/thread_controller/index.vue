@@ -1,10 +1,12 @@
 <template>
-  <div ref="appContainer" 
-    class="iframe-box" 
+  <div
+    class="iframe-box"
     v-if="threadItem.iStarted"
     v-show="threadItem.iActived"
+    :ref="`appContainer${threadItem.threadId}`"
     :style="{zIndex: threadItem.zIndex}"
-    @mouseenter="doFocus(threadItem)">
+    @mousedown="doFocus(threadItem)"
+  >
     <header class="hand-bar">
       <div class="drag-handle" ref="dragHandle"></div>
       <ButtonGroup class="hand-btns">
@@ -13,7 +15,7 @@
       </ButtonGroup>
     </header>
     <keep-alive>
-      <iframe class="iframe-default" :src="threadItem.href"></iframe>
+      <slot />
     </keep-alive>
   </div>
 </template>
@@ -40,12 +42,17 @@
       // }
     },
     mounted() {
-      this.$nextTick(() => {
-        new Drag({dragBox: this.$refs.appContainer, dragHandle: this.$refs.dragHandle, hasEdge: false})
+      this.$nextTick(async () => {
+        const ref = await this.$refs[`appContainer${this.threadItem.threadId}`]
+        new Drag({dragBox: ref, dragHandle: this.$refs.dragHandle, hasEdge: false})
+        this.appendCompToRoot(ref)
       })
     },
     methods: {
-      ...mapActions(['doMinimized', 'doClose', 'doFocus'])
+      ...mapActions(['doMinimized', 'doClose', 'doFocus']),
+      appendCompToRoot(component) {
+        document.body.appendChild(component)
+      }
     }
   }
 </script>
@@ -66,14 +73,6 @@
     width: 100%;
     position: relative;
     min-height: 28px;
-  }
-
-  .iframe-default {
-    height: 94%;
-    width: 100%;
-    border: 0;
-    border-radius: 0 0 4px 4px;
-    position: relative;
   }
 
   .hand-btns {

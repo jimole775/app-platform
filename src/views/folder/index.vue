@@ -1,44 +1,48 @@
 <template>
-  <div
-    ref="FolderRef"
+  <ThreadController 
+    v-if="folder.iStarted"
     class="folder-box"
-    v-show="folder.iActived"
-    :style="{zIndex: folder.zIndex}"
-    @mouseenter="doFocus(folder)">
-    <header class="hand-bar">
-      <div class="drag-handle" ref="dragHandle"></div>
-      <ButtonGroup class="hand-btns">
-        <Button icon="ios-remove" @click.native="doMinimized(folder)" />
-        <Button class="btn-close" icon="ios-close" @click.native="doClose(folder)" />
-      </ButtonGroup>
-    </header>
-    <keep-alive>
-      <div class="folder-box-default">dasdasdasd</div>
-    </keep-alive>
-  </div>
+    :threadItem="folder"
+  >
+    <div class="folder-box-default">dasdasdasd</div>
+  </ThreadController>
+  <!-- <header class="hand-bar">
+    <div class="drag-handle" ref="dragHandle"></div>
+    <ButtonGroup class="hand-btns">
+      <Button icon="ios-remove" @click.native="doMinimized(folder)" />
+      <Button class="btn-close" icon="ios-close" @click.native="doClose(folder)" />
+    </ButtonGroup>
+  </header>
+  <keep-alive>
+    <div class="folder-box-default">dasdasdasd</div>
+  </keep-alive> -->
 </template>
 <script>
   // 使用iframe用作每个App的容器
   // 每个容器必须要实时获取App的尺寸，以调整自身的状态
   import {mapActions, mapMutations} from 'vuex'
-  import Drag from '@public/drag'
+  import ThreadController from "@comp/thread_controller/index"
+  // import Drag from '@public/drag'
   export default {
     name: 'Folder',
+    components: {
+      ThreadController
+    },
     data() {
       return {
         dragger: null
       }
     },
-    watch: {
-      'folder.iActived': {
-        handler (iActived) {
-          if (iActived === true && !this.dragger) {
-            this.dragger = new Drag({dragBox: this.$refs.FolderRef, dragHandle: this.$refs.dragHandle, hasEdge: false})
-          }
-        },
-        immediate: true
-      }
-    },
+    // watch: {
+    //   'folder.iActived': {
+    //     handler (iActived) {
+    //       if (iActived === true && !this.dragger) {
+    //         this.dragger = new Drag({dragBox: this.$refs.FolderRef, dragHandle: this.$refs.dragHandle, hasEdge: false})
+    //       }
+    //     },
+    //     immediate: true
+    //   }
+    // },
     computed: {
       // appState(){
       //   return this.threadItem
@@ -47,7 +51,7 @@
         return this.$store.state.folder
       }
     },
-    mounted() {
+    mounted () {
       // this.$nextTick(async () => {
       //   await this.$refs.FolderRef
       //   new Drag({dragBox: this.$refs.FolderRef, dragHandle: this.$refs.dragHandle, hasEdge: false})
@@ -64,7 +68,7 @@
     width: 80%;
     position: fixed;
     top: 3rem;
-    left: 50% - 20rem;
+    left: 10%;
     border-radius: 4px;
     border: 0;
     box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
@@ -83,6 +87,7 @@
     border: 0;
     border-radius: 0 0 4px 4px;
     position: relative;
+    background: #fff;
   }
 
   .hand-btns {

@@ -11,21 +11,25 @@ export default new Vuex.Store({
     folder: {
       name: 'folder',
       type: 'system',
+      iStarted: false,
+      iDestoryed: false,
       iMinimized: false,
       iActived: false,
       iFocused: false,
       iTop: false,
       zIndex: 0,
-      threadId: 0
+      threadId: 9999
     },
     threads: [],
     maxZIndex: 100,
   },
   mutations: {
     updateFolder (state, active) {
+      state.folder.iStarted = active
       state.folder.iActived = active
       state.folder.iFocused = active
       state.folder.iMinimized = !active
+      state.folder.iDestoryed = !active
     },
     dropTransfer(state, cordinate) {
       // 交换位置，并存储到本地
@@ -127,16 +131,20 @@ export default new Vuex.Store({
         threadItem.iDestoryed = true
         threadItem.iFocused = false
         threadItem.iTop = false
-        let whillDestoryPosition = 0
-        let isEmptyThread = true
-        this.state.threads.forEach((loopItem, loopIndex)=>{
-          if(loopItem.threadId === threadItem.threadId){
-            whillDestoryPosition = loopIndex
-            isEmptyThread = false
-          }
-        })
-        if (isEmptyThread) this.commit('resetThreads')
-        else this.commit('threadsDelete', whillDestoryPosition)
+        // 把清空和剔除操作放到下个事件队列，
+        // 防止threadItem快速被清除，v-if="threadItem.iStarted"事件无法触发
+        setTimeout(() => {
+          let whillDestoryPosition = 0
+          let isEmptyThread = true
+          this.state.threads.forEach((loopItem, loopIndex)=>{
+            if(loopItem.threadId === threadItem.threadId){
+              whillDestoryPosition = loopIndex
+              isEmptyThread = false
+            }
+          })
+          if (isEmptyThread) this.commit('resetThreads')
+          else this.commit('threadsDelete', whillDestoryPosition)
+        }, 0)
       }, 150)
     },
     doActive(store, threadItem) {

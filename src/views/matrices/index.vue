@@ -10,7 +10,9 @@
       <Icon type="ios-disc" />
     </Button>
     <div v-for="threadItem in activeThreads" :key="'id_' + threadItem.threadId">
-      <ThreadController :threadItem="threadItem" />
+      <ThreadController :threadItem="threadItem">
+        <iframe class="iframe-default" :src="threadItem.href"></iframe>
+      </ThreadController>
     </div>
   </div>
 </template>
@@ -284,5 +286,12 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.iframe-default {
+  height: 94%;
+  width: 100%;
+  border: 0;
+  border-radius: 0 0 4px 4px;
+  position: relative;
 }
 </style>
