@@ -12,7 +12,7 @@
     </Row>
     <Row>
       <Col span="24" class="copy-right">
-        © 2019-2025 727346595@qq.com 版权所有 备案号：<a href="https://beian.miit.gov.cn">浙ICP备19013138号-1</a>
+        © 2019-2025 rongchuanda@chinasie.com 版权所有 备案号：<a href="https://beian.miit.gov.cn">浙ICP备19013138号-1</a>
       </Col>
     </Row>
   </div>
